@@ -31,7 +31,7 @@ Un semáforo de evolución semanal (verde, amarillo, rojo) que cruza entrenamien
 - Objetivos: fuerza, bajar grasa y movilidad.
 - Reglas de progresión (ventana de 3 semanas): subir con adherencia ≥ 85%, techo de repeticiones en todas las series y RPE promedio ≤ 7; bajar con adherencia < 60% por 2 semanas o dolor reportado. Umbrales iniciales, pendientes de calibrar con usuarios reales.
 - Datos en Supabase, proyecto `apps-one`, schema `evolva`, con acceso por fila (RLS) por usuario. Publicado en Vercel (proyecto `evolva`).
-- Acceso por suscripción de Apps One. **Pendiente:** la app aún no verifica `tiene_acceso('evolva')`; hoy entra cualquier cuenta con sesión.
+- Acceso por suscripción de Apps One: `evolva.con_acceso()` (= `tiene_acceso('evolva')` o administrador). Sin acceso no se puede crear ni modificar; leer, exportar y eliminar los propios datos sigue permitido. **Pendiente:** plan, precio y categoría de Evolva en Apps One (la app está inactiva en el catálogo).
 - Plataforma: web instalable por ahora. **Decisión abierta:** pasar a app nativa (Flutter o React Native) en una fase posterior.
 - La IA (Claude) solo redactará sugerencias de comida y el resumen semanal, con datos resumidos; nunca decide niveles ni modifica datos. Aún no implementada.
 - Fases posteriores: escaneo de código de barras y consulta de Open Food Facts desde el backend.

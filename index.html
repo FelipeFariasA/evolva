@@ -75,7 +75,7 @@ header.top .sub>span:last-child{max-width:48vw;overflow:hidden;text-overflow:ell
 .between{justify-content:space-between}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r-md);padding:12px 18px;background:var(--pri);color:var(--pri-tx);font-weight:600;font-size:16px;min-height:48px;transition:background-color var(--t-fast) var(--ease),transform 120ms var(--ease),filter var(--t-fast) var(--ease)}
+.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r-md);padding:12px 18px;background:var(--pri);color:var(--pri-tx);font-weight:600;font-size:16px;min-height:48px;transition:background-color var(--t-fast) var(--ease),transform 120ms var(--ease),filter var(--t-fast) var(--ease)}
 .btn:active:not(:disabled){transform:scale(.97)}
 @media (hover:hover){.btn:hover:not(:disabled){filter:brightness(1.08)} .chip:hover{border-color:var(--pri)} .res:hover{border-color:var(--pri)}}
 .btn.sec{background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--tx)}
@@ -304,11 +304,53 @@ function vLogin(msg) {
   };
 }
 
+// Acceso por suscripción de Apps One (o administrador). La base de datos lo exige igual:
+// esta pantalla solo evita que alguien sin plan llegue a formularios que no podrá guardar.
+async function tieneAcceso() {
+  const { data, error } = await sb.rpc('con_acceso');
+  if (error) {
+    if (/PGRST202|Could not find the function/i.test(error.message || '') || error.code === 'PGRST202') return true; // función aún no instalada
+    throw error;
+  }
+  return data === true;
+}
+function vSinAcceso(perfil) {
+  $('#root').innerHTML = `
+  <div class="login">
+    <div class="row">${LOGO}<span class="wordmark">Evolva</span></div>
+    <h1>Activa tu <em>suscripción</em> para entrenar.</h1>
+    <p class="muted" style="margin:0">Evolva es parte de Apps One. Con un plan vigente tienes rutinas por niveles, metas de alimentación y tu semáforo semanal.</p>
+    <div class="card" style="margin-top:22px">
+      <a class="btn full" href="https://apps-one-omega.vercel.app" target="_blank" rel="noopener">Ver planes en Apps One</a>
+      <button class="btn sec full" id="sa-revisar" style="margin-top:10px">Ya me suscribí, revisar de nuevo</button>
+      <p class="small muted" style="margin:12px 0 0">Sesión iniciada como ${esc(S.user.email)}. Usa el mismo correo con el que pagaste en Apps One.</p>
+    </div>
+    ${perfil ? `<div class="card">
+      <h3>Tus datos siguen siendo tuyos</h3>
+      <p class="small muted">Puedes descargarlos o eliminarlos aunque no tengas un plan activo.</p>
+      <div class="row" style="flex-wrap:wrap;gap:8px"><button class="btn ghost" id="sa-exp">Exportar mis datos</button><button class="btn ghost" id="sa-del" style="color:var(--rojo)">Eliminar mis datos</button></div>
+    </div>` : ''}
+    <button class="btn ghost full" id="sa-out" style="margin-top:4px">Cerrar sesión</button>
+    <p class="aviso">Evolva no reemplaza a un profesional de la salud.</p>
+  </div>`;
+  $('#sa-revisar').onclick = ev => ocupado(ev.currentTarget, () => iniciar(S.user));
+  $('#sa-out').onclick = salir;
+  if (perfil) {
+    $('#sa-exp').onclick = ev => ocupado(ev.currentTarget, exportarDatos);
+    $('#sa-del').onclick = ev => ocupado(ev.currentTarget, () => eliminarDatos(() => vSinAcceso(null)));
+  }
+}
+
 async function iniciar(user) {
   S.user = user;
   $('#root').innerHTML = `<div class="empty" style="padding-top:30vh"><span class="spin"></span></div>`;
-  const { data: perfil, error } = await sb.from('perfiles').select('*').eq('id', user.id).maybeSingle();
-  if (error) { $('#root').innerHTML = `<div class="login"><div class="alert bad">${esc(errMsg(error))}</div><button class="btn ghost" style="margin-top:12px" onclick="salir()">Cerrar sesión</button></div>`; return; }
+  const [{ data: perfil, error }, acceso] = await Promise.all([
+    sb.from('perfiles').select('*').eq('id', user.id).maybeSingle(),
+    tieneAcceso().catch(e => ({ error: e }))
+  ]);
+  const errorCarga = error || acceso?.error;
+  if (errorCarga) { $('#root').innerHTML = `<div class="login"><div class="alert bad" role="alert">${esc(errMsg(errorCarga))}</div><button class="btn sec" id="ini-reintentar" style="margin-top:12px">Reintentar</button> <button class="btn ghost" style="margin-top:12px" onclick="salir()">Cerrar sesión</button></div>`; $('#ini-reintentar').onclick = () => iniciar(user); return; }
+  if (acceso !== true) return vSinAcceso(perfil);
   if (!perfil) return vOnboarding();
   S.perfil = perfil;
   await cargarBase();
@@ -928,23 +970,28 @@ async function vPerfil() {
   }); };
   $('#pf-meta').onclick = ev => ocupado(ev.currentTarget, async () => { const { data, error } = await sb.rpc('calcular_mi_meta'); if (error) return toast(errMsg(error)); S.meta = data; toast('Metas recalculadas'); ir('perfil'); });
   $('#pf-out').onclick = salir;
-  $('#pf-exp').onclick = ev => ocupado(ev.currentTarget, async () => {
-    const tablas = ['perfiles', 'sesiones', 'series', 'mediciones', 'registros_alimento', 'metas_nutricionales', 'evaluaciones_semanales', 'cambios_nivel'];
-    const out = { exportado: new Date().toISOString() };
-    for (const t of tablas) { const { data } = await sb.from(t).select('*'); out[t] = data || []; }
-    out.alimentos_propios = S.alimentos.filter(a => a.usuario_id === S.user.id);
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' }));
-    a.download = `evolva-${hoy()}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-  });
-  $('#pf-del').onclick = ev => ocupado(ev.currentTarget, async () => {
-    if (!confirm('Se eliminarán todos tus datos de Evolva: perfil, entrenamientos, comidas, mediciones y evaluaciones. No se puede deshacer. ¿Continuar?')) return;
-    if (prompt('Escribe ELIMINAR para confirmar') !== 'ELIMINAR') return toast('No se eliminó nada.');
-    const { error } = await sb.rpc('eliminar_mis_datos');
-    if (error) return toast(errMsg(error));
-    localStorage.removeItem(COLA); localStorage.removeItem(BORRADOR);
-    toast('Tus datos fueron eliminados.'); S.perfil = null; vOnboarding();
-  });
+  $('#pf-exp').onclick = ev => ocupado(ev.currentTarget, exportarDatos);
+  $('#pf-del').onclick = ev => ocupado(ev.currentTarget, () => eliminarDatos(vOnboarding));
+}
+
+// Exportar y eliminar funcionan siempre, incluso sin suscripción: los datos son de la persona.
+async function exportarDatos() {
+  const tablas = ['perfiles', 'sesiones', 'series', 'mediciones', 'registros_alimento', 'metas_nutricionales', 'evaluaciones_semanales', 'cambios_nivel'];
+  const out = { exportado: new Date().toISOString() };
+  for (const t of tablas) { const { data } = await sb.from(t).select('*'); out[t] = data || []; }
+  const { data: propios } = await sb.from('alimentos').select('*').eq('usuario_id', S.user.id);
+  out.alimentos_propios = propios || [];
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' }));
+  a.download = `evolva-${hoy()}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+async function eliminarDatos(despues) {
+  if (!confirm('Se eliminarán todos tus datos de Evolva: perfil, entrenamientos, comidas, mediciones y evaluaciones. No se puede deshacer. ¿Continuar?')) return;
+  if (prompt('Escribe ELIMINAR para confirmar') !== 'ELIMINAR') return toast('No se eliminó nada.');
+  const { error } = await sb.rpc('eliminar_mis_datos');
+  if (error) return toast(errMsg(error));
+  localStorage.removeItem(COLA); localStorage.removeItem(BORRADOR);
+  toast('Tus datos fueron eliminados.'); S.perfil = null; despues();
 }
 
 // ---------- arranque ----------

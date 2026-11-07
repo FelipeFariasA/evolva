@@ -3,196 +3,247 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f1f5f9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0e1a3a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1a3a" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800;900&display=swap">
 <title>Evolva</title>
 <meta name="description" content="Rutinas por niveles, alimentación y semáforo de evolución semanal.">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.webmanifest">
 <style>
-/* Sistema de diseño Evolva (ui-ux-pro-max: Vibrant & Block-based, dark-first, Barlow Condensed + Barlow).
-   Primario azul eléctrico para no competir con los colores del semáforo; naranjo solo para nutrición y racha. */
+/* Evolva · mundo "Mapa de Metro". Esmalte azul noche, placa de porcelana, una línea de color por objetivo.
+   Verde, ámbar y rojo quedan reservados para el estado del servicio (el semáforo). */
 :root{
-  --bg:#f1f5f9; --card:#ffffff; --card2:#f8fafc; --tx:#0f172a; --mut:#475569; --line:#e2e8f0;
-  --pri:#2563eb; --pri-tx:#ffffff; --ring:#2563eb;
-  --verde:#16a34a; --amarillo:#ca8a04; --rojo:#dc2626; --on-verde:#ffffff; --on-amarillo:#0f172a; --on-rojo:#ffffff;
-  --entreno:#2563eb; --nutri:#ea580c; --cuerpo:#db2777;
-  --sh:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.06);
-  --r-lg:20px; --r-md:14px; --r-sm:10px;
-  --t-fast:150ms; --t-med:240ms; --ease:cubic-bezier(.2,.8,.2,1);
-  --f-head:"Barlow Condensed",system-ui,sans-serif; --f-body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --noche:#0e1a3a; --noche-2:#16244b; --noche-3:#26345f; --porcelana:#f4f1ea;
+  --placa:#f4f1ea; --ground:#f4f1ea; --plate:#fbfaf7; --plate-2:#ebe7dd; --tx:#0e1a3a; --mut:#4a5578; --line:#d5d0c3;
+  --on-noche:#f4f1ea; --on-noche-mut:#aab3cf;
+  --linea:#2f6fe4; --on-linea:#ffffff;
+  --pri:var(--linea); --pri-tx:var(--on-linea); --ring:#2f6fe4;
+  --verde:#1f9d5c; --amarillo:#f2b200; --rojo:#d93025; --on-verde:#ffffff; --on-amarillo:#0e1a3a; --on-rojo:#ffffff;
+  --entreno:var(--linea); --nutri:#b5652b; --cuerpo:#0f8f9e;
+  --sh:0 1px 0 rgba(14,26,58,.06),0 6px 18px rgba(14,26,58,.07);
+  --r-lg:10px; --r-md:8px; --r-sm:6px;
+  --t-fast:140ms; --t-med:260ms; --ease:cubic-bezier(.16,1,.3,1);
+  --f-head:"SepFix","Overpass",system-ui,sans-serif; --f-body:"SepFix","Overpass",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
 }
+:root[data-obj="bajar_grasa"]{--linea:#c0601e;--ring:#c0601e}
+:root[data-obj="movilidad"]{--linea:#0f8f9e;--ring:#0f8f9e}
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0b1220; --card:#131c2c; --card2:#1a2538; --tx:#f1f5f9; --mut:#9fb0c6; --line:#24324a;
-    --pri:#60a5fa; --pri-tx:#06101f; --ring:#93c5fd;
-    --verde:#22c55e; --amarillo:#facc15; --rojo:#f87171; --on-verde:#052e16; --on-amarillo:#1c1500; --on-rojo:#2a0606;
-    --entreno:#60a5fa; --nutri:#fb923c; --cuerpo:#f472b6; --sh:none;
+    --placa:#f4f1ea; --ground:#0e1a3a; --plate:#16244b; --plate-2:#1d2d5a; --tx:#f4f1ea; --mut:#aab3cf; --line:#2b3a68;
+    --linea:#5b8ff0; --on-linea:#08112a; --ring:#9dbaf6;
+    --verde:#34c37a; --amarillo:#ffc629; --rojo:#ff6a5c; --on-verde:#06210f; --on-amarillo:#1c1500; --on-rojo:#2a0606;
+    --nutri:#e08a4a; --cuerpo:#2fc1d0; --sh:none; color-scheme:dark;
   }
-}
-:root[data-theme="dark"]{
-  --bg:#0b1220; --card:#131c2c; --card2:#1a2538; --tx:#f1f5f9; --mut:#9fb0c6; --line:#24324a;
-  --pri:#60a5fa; --pri-tx:#06101f; --ring:#93c5fd;
-  --verde:#22c55e; --amarillo:#facc15; --rojo:#f87171; --on-verde:#052e16; --on-amarillo:#1c1500; --on-rojo:#2a0606;
-  --entreno:#60a5fa; --nutri:#fb923c; --cuerpo:#f472b6; --sh:none;
+  :root:not([data-theme="light"])[data-obj="bajar_grasa"]{--linea:#e08a4a;--ring:#f0b58a}
+  :root:not([data-theme="light"])[data-obj="movilidad"]{--linea:#2fc1d0;--ring:#8fe2ea}
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 var(--f-body);-webkit-tap-highlight-color:transparent;font-variant-numeric:tabular-nums}
+html{-webkit-text-size-adjust:100%;accent-color:var(--linea);caret-color:var(--linea);scrollbar-color:color-mix(in srgb,var(--mut) 45%,transparent) transparent}
+body{margin:0;background:var(--ground);color:var(--tx);font:16px/1.5 var(--f-body);-webkit-tap-highlight-color:transparent;font-variant-numeric:tabular-nums}
+::selection{background:color-mix(in srgb,var(--linea) 32%,transparent);color:var(--tx)}
 button,input,select,textarea{font:inherit;color:inherit}
-button,summary,[role="button"],.chip,.res{cursor:pointer}
-input,select,textarea{font-size:16px;width:100%;min-height:48px;padding:11px 14px;border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--card2);transition:border-color var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease)}
+button,summary,.chip,.res{cursor:pointer}
+input,select,textarea{font-size:16px;width:100%;min-height:48px;padding:11px 14px;border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--plate);transition:border-color var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease)}
 textarea{min-height:auto}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 25%,transparent)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--linea);box-shadow:0 0 0 3px color-mix(in srgb,var(--linea) 28%,transparent)}
 :focus-visible{outline:3px solid var(--ring);outline-offset:2px}
 input:focus-visible,select:focus-visible,textarea:focus-visible{outline:none}
-label{display:block;font-size:14px;font-weight:500;color:var(--mut);margin:14px 0 6px}
-h1,h2,h3{margin:0;line-height:1.1;font-family:var(--f-head);font-weight:700;letter-spacing:.005em}
-h1{font-size:26px} h2{font-size:24px} h3{font-size:19px;font-weight:600}
-.wordmark{font-family:var(--f-head);font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-/* superficies del navegador con la paleta */
-:root{color-scheme:light;accent-color:var(--pri);caret-color:var(--pri);scrollbar-color:color-mix(in srgb,var(--mut) 45%,transparent) transparent}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark}}
-:root[data-theme="dark"]{color-scheme:dark}
-::selection{background:color-mix(in srgb,var(--pri) 30%,transparent);color:var(--tx)}
+label{display:block;font-size:14px;font-weight:600;color:var(--mut);margin:14px 0 6px}
+h1,h2,h3{margin:0;line-height:1.1;font-family:var(--f-head);font-weight:800;letter-spacing:-.01em}
+h1{font-size:28px} h2{font-size:22px} h3{font-size:18px;font-weight:700}
+.ico{width:20px;height:20px;flex-shrink:0;vertical-align:-4px}
 [aria-busy="true"]{cursor:progress}
 .btn[aria-busy="true"]::before{content:"";width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .8s linear infinite}
-.ico{width:20px;height:20px;flex-shrink:0;vertical-align:-4px}
-.app{max-width:560px;margin:0 auto;min-height:100dvh;padding:0 16px calc(96px + env(safe-area-inset-bottom))}
-header.top{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) 0 6px}
-header.top .logo{width:34px;height:34px}
-header.top h1{font-size:26px;letter-spacing:.02em;text-transform:uppercase}
-header.top .sub{margin-left:auto;min-width:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:13px;color:var(--mut)}
-header.top .sub>span:last-child{max-width:48vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--tx);font-family:var(--f-head);font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;margin:14px 0;box-shadow:var(--sh)}
-.muted{color:var(--mut)}
-.small{font-size:14px}
-.row{display:flex;gap:10px;align-items:center}
-.between{justify-content:space-between}
+/* shell */
+.app{max-width:560px;margin:0 auto;min-height:100dvh;padding:0 0 calc(92px + env(safe-area-inset-bottom))}
+header.top{display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;background:var(--noche);color:var(--on-noche)}
+header.top .logo{width:30px;height:30px}
+header.top h1{font-size:22px;font-weight:900;letter-spacing:.06em}
+header.top .sub{margin-left:auto;min-width:0;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--on-noche-mut)}
+header.top .sub>span:last-child{max-width:40vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-head);font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--on-noche);text-transform:uppercase}
+.badge i{width:14px;height:14px;border-radius:50%;background:var(--porcelana);border:4px solid var(--linea)}
+main#view{padding:0 16px}
+/* la banda azul noche del shell llega a ambos bordes aunque la columna mida 560 px */
+.app header.top,.app .linea-nivel{box-shadow:0 0 0 100vmax var(--noche);clip-path:inset(0 -100vmax)}
+.card{background:var(--plate);border-radius:var(--r-lg);padding:18px 16px;margin:12px 0;box-shadow:var(--sh)}
+.sec{padding:20px 0 4px}
+.sec+.sec{border-top:1px solid var(--line)}
+.muted{color:var(--mut)} .small{font-size:14px}
+.row{display:flex;gap:10px;align-items:center} .between{justify-content:space-between}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r-md);padding:12px 18px;background:var(--pri);color:var(--pri-tx);font-weight:600;font-size:16px;min-height:48px;transition:background-color var(--t-fast) var(--ease),transform 120ms var(--ease),filter var(--t-fast) var(--ease)}
+.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r-md);padding:12px 18px;background:var(--linea);color:var(--on-linea);font-weight:800;font-size:16px;letter-spacing:.01em;min-height:48px;transition:filter var(--t-fast) var(--ease),transform 110ms var(--ease)}
 .btn:active:not(:disabled){transform:scale(.97)}
-@media (hover:hover){.btn:hover:not(:disabled){filter:brightness(1.08)} .chip:hover{border-color:var(--pri)} .res:hover{border-color:var(--pri)}}
-.btn.sec{background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--tx)}
+@media (hover:hover){.btn:hover:not(:disabled){filter:brightness(1.08)} .chip:hover{border-color:var(--linea)} .res:hover{border-color:var(--linea)}}
+.btn.sec{background:color-mix(in srgb,var(--linea) 14%,var(--plate));color:var(--tx)}
 .btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--tx)}
 .btn.danger{background:var(--rojo);color:var(--on-rojo)}
 .btn.full{width:100%}
 .btn.icon{min-width:44px;min-height:44px;padding:10px}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:disabled{opacity:.45;cursor:not-allowed}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{border:1.5px solid var(--line);background:var(--card2);border-radius:999px;padding:8px 14px;font-size:15px;font-weight:500;min-height:44px;transition:background-color var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease),transform 120ms var(--ease)}
+.chip{border:1.5px solid var(--line);background:var(--plate);border-radius:999px;padding:8px 14px;font-size:15px;font-weight:600;min-height:44px;transition:background-color var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease),transform 110ms var(--ease)}
 .chip:active{transform:scale(.97)}
-.chip.on{background:var(--pri);border-color:var(--pri);color:var(--pri-tx);font-weight:600}
-.chip.actual::after{content:"actual";margin-left:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.8}
-nav.tabs{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:10}
-nav.tabs .in{display:flex;max-width:560px;width:100%;padding:6px 6px 4px}
-nav.tabs button{flex:1;background:none;border:0;padding:6px 0 8px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:500;color:var(--mut);min-height:56px;border-radius:var(--r-md);transition:color var(--t-fast) var(--ease)}
-nav.tabs button svg{width:24px;height:24px;padding:3px 14px;box-sizing:content-box;border-radius:999px;transition:background-color var(--t-med) var(--ease)}
-nav.tabs button.on{color:var(--tx);font-weight:600}
-nav.tabs button.on svg{background:color-mix(in srgb,var(--pri) 22%,transparent);color:var(--pri)}
-/* semáforo */
-.hero-score{position:relative;overflow:hidden}
-.hero-score::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--sem,var(--pri))}
-.score{display:flex;align-items:center;gap:18px}
-.light{width:112px;height:112px;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
-.light b{font-family:var(--f-head);font-size:56px;line-height:.9;font-weight:700}
-.light span{font-size:13px;font-weight:600;opacity:.85}
+.chip.on{background:var(--linea);border-color:var(--linea);color:var(--on-linea);font-weight:800}
+.chip.actual::after{content:"· actual";margin-left:6px;font-size:12px;font-weight:700;opacity:.85}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--noche);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:10}
+nav.tabs .in{display:flex;max-width:560px;width:100%;padding:4px 4px 2px}
+nav.tabs button{flex:1;background:none;border:0;padding:8px 0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--on-noche-mut);min-height:58px;position:relative;transition:color var(--t-fast) var(--ease)}
+nav.tabs button svg{width:24px;height:24px}
+nav.tabs button::before{content:"";position:absolute;top:0;left:28%;right:28%;height:4px;border-radius:0 0 3px 3px;background:var(--linea);transform:scaleX(0);transition:transform var(--t-med) var(--ease)}
+nav.tabs button.on{color:var(--on-noche);font-weight:800}
+nav.tabs button.on::before{transform:scaleX(1)}
+/* firma: diagrama de línea */
+.linea-nivel{background:var(--noche);color:var(--on-noche);margin:0 -16px;padding:4px 28px 52px;position:relative}
+.linea-nivel .riel{position:relative;height:6px;margin:30px 0 0;background:var(--noche-3);border-radius:3px}
+.linea-nivel .riel b{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--linea);transform-origin:left;animation:rielIn 900ms var(--ease) both}
+@keyframes rielIn{from{transform:scaleX(0)}}
+.est{font-style:normal;position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--porcelana);border:5px solid var(--noche-3)}
+.est.ok{border-color:var(--linea)}
+.est.aqui{width:30px;height:30px;margin:-15px 0 0 -15px;border-width:7px;border-color:var(--linea);box-shadow:0 0 0 4px var(--noche)}
+.est span{position:absolute;top:22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:700;color:var(--on-noche-mut)}
+.est.aqui span{top:28px;color:var(--on-noche);font-weight:800}
+.est:first-of-type span{left:0;transform:none} .est:last-of-type span{left:auto;right:0;transform:none}
+.est.aqui:first-of-type span{left:-4px}
+.tren{position:absolute;top:-30px;transform:translateX(-50%);background:var(--porcelana);color:var(--noche);font:800 12px/1 var(--f-head);padding:5px 7px;border-radius:4px;white-space:nowrap}
+.tren::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:var(--porcelana)}
+.placa{background:var(--placa);color:var(--noche);border-radius:var(--r-lg);padding:16px;margin:-12px 0 0;position:relative;box-shadow:0 10px 28px rgba(14,26,58,.22);display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center}
+.placa .light{grid-row:1/3}
+.light{width:92px;height:92px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.light b{font:900 48px/.9 var(--f-head)}
+.light span{font-size:12px;font-weight:700;opacity:.85}
 .light.verde{background:var(--verde);color:var(--on-verde)} .light.amarillo{background:var(--amarillo);color:var(--on-amarillo)} .light.rojo{background:var(--rojo);color:var(--on-rojo)}
-.estado{font-family:var(--f-head);font-size:26px;font-weight:700;line-height:1.05}
-.dots{display:flex;gap:6px;margin-top:8px}
-.dots i{width:28px;height:8px;border-radius:99px;background:var(--line)}
-.dots i.verde.on{background:var(--verde)} .dots i.amarillo.on{background:var(--amarillo)} .dots i.rojo.on{background:var(--rojo)}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.kpi{background:var(--card2);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;display:flex;align-items:center;gap:10px}
-.kpi b{display:block;font-family:var(--f-head);font-size:26px;line-height:1;font-weight:700}
+.estado{font:900 26px/1.05 var(--f-head);letter-spacing:-.01em}
+.servicio{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.servicio .ico{width:18px;height:18px}
+.placa .motivo{grid-column:1/3;margin:10px 0 0;padding-top:10px;border-top:1.5px solid #d9d3c4;font-size:15px}
+.placa .motivo ul{margin:6px 0 0;padding-left:18px;color:#3b4669;font-size:14px}
+.ramales{display:grid;gap:12px;margin-top:6px}
+.ramal{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:end}
+.ramal span{font-size:14px;font-weight:600;color:var(--mut)}
+.ramal b{font:900 22px/1 var(--f-head)}
+.ramal .t{grid-column:1/3;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.ramal .t i{display:block;height:100%;width:100%;border-radius:3px;transform-origin:left;transform:scaleX(calc(var(--p,0)/100));transition:transform 600ms var(--ease)}
+.semana{display:flex;justify-content:space-between;position:relative;margin-top:12px}
+.semana::before{content:"";position:absolute;top:12px;left:12px;right:12px;height:6px;border-radius:3px;background:var(--line)}
+.dia{position:relative;text-align:center;font-size:12px;font-weight:700;color:var(--mut);width:30px}
+.dia i{display:block;width:30px;height:30px;margin:0 auto 4px;border-radius:50%;background:var(--ground);border:5px solid var(--line)}
+.dia.ok i{background:var(--linea);border-color:var(--linea)}
+.dia.hoy{color:var(--tx);font-weight:900}
+.dia.hoy i{border-color:var(--linea)}
+.dia.hoy::after{content:"hoy";position:absolute;left:50%;top:-18px;transform:translateX(-50%);font-size:11px;font-weight:800;color:var(--linea)}
+/* letrero de estación: la próxima parada como señal, no como alerta genérica */
+.letrero{background:var(--noche);color:var(--on-noche);border-radius:var(--r-lg);padding:14px 16px;margin-top:4px}
+.letrero h2::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--porcelana);border:5px solid var(--linea);margin-right:10px;vertical-align:-1px}
+.letrero.good h2::before{border-color:var(--verde)} .letrero.bad h2::before{border-color:var(--rojo)}
+.letrero .small{color:var(--on-noche-mut);font-weight:700}
+.letrero h2{margin-top:6px}
+.letrero p{color:var(--on-noche)}
+.letrero .btn.sec{background:var(--noche-3);color:var(--on-noche)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .letrero{background:var(--noche-2)}}
+.placa{border:1.5px solid #d9d3c4}
+/* el punto medio de Overpass queda pegado al texto siguiente: se toma de una fuente del sistema */
+@font-face{font-family:"SepFix";src:local("Segoe UI"),local("Arial"),local("Helvetica Neue"),local("Roboto");unicode-range:U+00B7}
+::placeholder{color:var(--mut);opacity:1;font-style:italic;font-weight:400}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.kpi{border-top:2px solid var(--line);padding-top:8px}
+.kpi b{display:block;font:900 26px/1 var(--f-head)}
 .kpi span{font-size:13px;color:var(--mut)}
-.kpi .ico{width:24px;height:24px}
-.rings{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center}
-.ring{position:relative;text-align:center}
-.ring svg{width:92px;height:92px}
-.ring circle{fill:none;stroke-width:9;stroke-linecap:round}
-.ring .trk{stroke:var(--line)}
-.ring .val{animation:ringIn 700ms var(--ease) both}
-@keyframes ringIn{from{stroke-dashoffset:var(--c)}}
-.ring b{position:absolute;top:28px;left:0;right:0;font-family:var(--f-head);font-size:26px;font-weight:700}
-.ring span{display:block;font-size:14px;font-weight:500;color:var(--mut)}
-.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
-.bar>i{display:block;height:100%;width:100%;background:var(--pri);border-radius:99px;transform-origin:left;transform:scaleX(calc(var(--p,0) / 100));transition:transform 500ms var(--ease)}
-.alert{border-radius:var(--r-md);padding:14px;background:color-mix(in srgb,var(--pri) 12%,var(--card));font-size:15px;border:1px solid transparent}
-.alert.warn{background:color-mix(in srgb,var(--amarillo) 16%,var(--card));border-color:color-mix(in srgb,var(--amarillo) 35%,transparent)}
-.alert.bad{background:color-mix(in srgb,var(--rojo) 13%,var(--card));border-color:color-mix(in srgb,var(--rojo) 35%,transparent)}
-.alert.good{background:color-mix(in srgb,var(--verde) 13%,var(--card));border-color:color-mix(in srgb,var(--verde) 35%,transparent)}
-.alert b{font-weight:600}
-ul.mot{margin:8px 0 0;padding-left:18px}
-ul.mot li{margin:4px 0}
-/* rutina */
-.ex{border-top:1px solid var(--line);padding:16px 0}
-.ex:first-of-type{border-top:0;padding-top:4px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar>i{display:block;height:100%;width:100%;background:var(--linea);border-radius:3px;transform-origin:left;transform:scaleX(calc(var(--p,0) / 100));transition:transform 500ms var(--ease)}
+.alert{border-radius:var(--r-md);padding:14px;background:color-mix(in srgb,var(--linea) 10%,var(--plate));font-size:15px;border:1.5px solid color-mix(in srgb,var(--linea) 30%,transparent)}
+.alert.warn{background:color-mix(in srgb,var(--amarillo) 14%,var(--plate));border-color:color-mix(in srgb,var(--amarillo) 45%,transparent)}
+.alert.bad{background:color-mix(in srgb,var(--rojo) 11%,var(--plate));border-color:color-mix(in srgb,var(--rojo) 40%,transparent)}
+.alert.good{background:color-mix(in srgb,var(--verde) 11%,var(--plate));border-color:color-mix(in srgb,var(--verde) 40%,transparent)}
+.alert b{font-weight:800}
+ul.mot{margin:8px 0 0;padding-left:18px} ul.mot li{margin:4px 0}
+/* rutina: la ruta de la sesión */
+.ruta{position:relative;margin-top:6px}
+.ruta::before{content:"";position:absolute;top:22px;bottom:22px;left:21px;width:6px;border-radius:3px;background:var(--line)}
+.ex{position:relative;padding:14px 0 16px 62px}
+.ex .picto{position:absolute;left:0;top:12px;width:48px;height:48px;border-radius:10px;background:var(--linea);color:var(--on-linea);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--ground)}
+.ex .picto svg{width:34px;height:34px}
+.ex .num{position:absolute;left:34px;top:4px;min-width:22px;height:22px;border-radius:11px;background:var(--noche);color:var(--on-noche);font:800 12px/22px var(--f-head);text-align:center;padding:0 5px;box-shadow:0 0 0 3px var(--ground)}
+.ex h3{font-size:18px}
 .ex .meta{font-size:14px;color:var(--mut);margin-top:2px}
 .ex .var{font-size:14px;color:var(--mut);margin-top:6px}
-.ex .num{width:32px;height:32px;border-radius:10px;background:color-mix(in srgb,var(--pri) 16%,var(--card));color:var(--pri);display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-weight:700;font-size:18px;flex-shrink:0}
-.sets{display:grid;grid-template-columns:30px 1fr 1fr 1fr;gap:8px;align-items:center;margin-top:12px}
-.sets.sin-carga{grid-template-columns:30px 1fr 1fr}
-.sets .h{font-size:12px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.sets{display:grid;grid-template-columns:28px 1fr 1fr 1fr;gap:8px;align-items:center;margin-top:12px}
+.sets.sin-carga{grid-template-columns:28px 1fr 1fr}
+.sets .h{font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
 .sets input,.sets select{padding:8px;text-align:center;min-height:44px}
-.sets .n{font-family:var(--f-head);font-size:18px;font-weight:600;color:var(--mut);text-align:center}
-.last{font-size:14px;color:var(--pri);margin-top:6px;font-weight:500}
-.check{display:flex;gap:12px;align-items:flex-start;margin:12px 0;font-size:15px;color:var(--tx);font-weight:400}
-.check input{width:22px;height:22px;min-height:22px;margin-top:1px;flex-shrink:0;accent-color:var(--pri)}
+.sets .n{font:800 17px var(--f-head);color:var(--mut);text-align:center}
+.last{font-size:14px;color:var(--tx);margin-top:6px;font-weight:600}
+.last::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--linea);margin-right:6px;vertical-align:1px}
+.check{display:flex;gap:12px;align-items:flex-start;margin:12px 0;font-size:15px;color:var(--tx);font-weight:500}
+.check input{width:22px;height:22px;min-height:22px;margin-top:1px;flex-shrink:0}
 /* comida */
-.macro{margin:10px 0}
+.macro{margin:12px 0}
 .macro .row{font-size:14px}
 .macro .row>span:last-child{white-space:nowrap}
+.kcal{display:flex;align-items:baseline;gap:8px}
+.kcal b{font:900 44px/1 var(--f-head)}
 .meal{border-top:1px solid var(--line);padding:14px 0}
 .meal:first-child{border-top:0;padding-top:0}
 .item{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:15px;padding:6px 0}
 .item .x{background:none;border:0;color:var(--mut);min-width:44px;min-height:44px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;transition:background-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease)}
 .item .x:hover{background:color-mix(in srgb,var(--rojo) 12%,transparent);color:var(--rojo)}
-.res{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px;border:1.5px solid var(--line);border-radius:var(--r-md);margin:8px 0;background:var(--card2);width:100%;text-align:left;min-height:48px;transition:border-color var(--t-fast) var(--ease),background-color var(--t-fast) var(--ease)}
-.res.on{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 12%,var(--card))}
-.tag{font-size:12px;font-weight:600;color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:0 6px;margin-left:6px}
-/* gráficos */
+.res{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px;border:1.5px solid var(--line);border-radius:var(--r-md);margin:8px 0;background:var(--plate);width:100%;text-align:left;min-height:48px;transition:border-color var(--t-fast) var(--ease)}
+.res.on{border-color:var(--linea);background:color-mix(in srgb,var(--linea) 10%,var(--plate))}
+.tag{font-size:12px;font-weight:700;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:0 6px;margin-left:6px}
+/* progreso: historial como línea */
 svg.chart{width:100%;height:auto;display:block}
 svg.chart text{fill:var(--mut);font-size:11px;font-family:var(--f-body)}
 svg.chart .grid{stroke:var(--line)}
 .legend{display:flex;gap:14px;font-size:13px;color:var(--mut);margin-top:8px;flex-wrap:wrap}
 .legend i{display:inline-block;width:14px;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
-.hist{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
-.hist:first-child{border-top:0}
-.hist .d{width:12px;height:12px;border-radius:4px;margin-top:5px;flex-shrink:0}
-dialog{border:1px solid var(--line);border-radius:22px;padding:0;width:min(520px,calc(100vw - 24px));max-height:88dvh;background:var(--card);color:var(--tx)}
-dialog::backdrop{background:rgba(2,6,23,.6)}
+.historial{position:relative;margin-top:8px}
+.historial::before{content:"";position:absolute;top:18px;bottom:18px;left:13px;width:6px;border-radius:3px;background:var(--line)}
+.hist{position:relative;display:flex;gap:14px;align-items:flex-start;padding:10px 0}
+.hist .d{position:relative;width:32px;height:32px;border-radius:50%;flex-shrink:0;border:6px solid;background:var(--plate);box-shadow:0 0 0 3px var(--plate)}
+.hist b.p{font:900 22px/1 var(--f-head)}
+dialog{border:0;border-radius:14px;padding:0;width:min(520px,calc(100vw - 24px));max-height:88dvh;background:var(--plate);color:var(--tx)}
+dialog::backdrop{background:rgba(8,14,34,.62)}
 dialog[open]{animation:dlgIn var(--t-med) var(--ease)}
-@keyframes dlgIn{from{opacity:0;transform:translateY(12px) scale(.98)}}
-dialog .dh{display:flex;justify-content:space-between;align-items:center;padding:12px 12px 12px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card);z-index:1}
+@keyframes dlgIn{from{opacity:0;transform:translateY(14px)}}
+dialog .dh{display:flex;justify-content:space-between;align-items:center;padding:10px 10px 10px 18px;background:var(--noche);color:var(--on-noche);position:sticky;top:0;z-index:1}
+dialog .dh .btn.ghost{color:var(--on-noche);border-color:var(--noche-3)}
 dialog .db{padding:14px 18px 20px;overflow:auto}
-.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:12px 18px;border-radius:var(--r-md);font-size:15px;font-weight:500;z-index:50;max-width:calc(100vw - 32px);box-shadow:0 10px 30px rgba(2,6,23,.3);animation:toastIn var(--t-med) var(--ease)}
-@keyframes toastIn{from{opacity:0;transform:translate(-50%,8px)}}
+.toast{position:fixed;left:50%;bottom:calc(98px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--porcelana);color:var(--noche);padding:12px 18px;border-radius:var(--r-md);font-size:15px;font-weight:700;z-index:50;max-width:calc(100vw - 32px);box-shadow:0 12px 30px rgba(8,14,34,.35);border-left:0;animation:toastIn var(--t-med) var(--ease)}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}}
 .aviso{font-size:13px;color:var(--mut);text-align:center;margin:20px 4px}
-/* login */
-.login{max-width:440px;margin:0 auto;padding:calc(40px + env(safe-area-inset-top)) 16px 32px}
-.login .logo{width:56px;height:56px}
-.login h1{font-size:44px;line-height:.98;text-transform:uppercase;margin:20px 0 10px;letter-spacing:.01em}
-.login h1 em{font-style:normal;color:var(--pri)}
-.feats{display:grid;gap:10px;margin:22px 0 4px}
-.feat{display:flex;gap:12px;align-items:flex-start}
-.feat .fi{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.feat .fi .ico{width:22px;height:22px}
-.feat b{display:block;font-weight:600}
-.feat span{font-size:14px;color:var(--mut)}
+/* ingreso */
+.login{min-height:100dvh;background:var(--noche);color:var(--on-noche);padding:calc(28px + env(safe-area-inset-top)) max(20px, calc((100% - 440px) / 2)) 32px}
+.login .logo{width:40px;height:40px}
+.wordmark{font:900 20px var(--f-head);letter-spacing:.08em}
+.login h1{font-size:40px;line-height:1;margin:26px 0 12px;font-weight:900}
+.login h1 em{font-style:normal;color:var(--linea)}
+.login .lead{color:var(--on-noche-mut);margin:0}
+.login .linea-nivel{margin:22px -20px 6px;padding:4px 32px 46px}
+.hitos{list-style:none;margin:6px 0 18px;padding:0;display:grid;gap:10px;font-size:15px;color:var(--on-noche-mut)}
+.hitos li{display:flex;gap:12px;align-items:flex-start}
+.hitos i{width:12px;height:12px;border-radius:50%;margin-top:5px;flex-shrink:0;box-shadow:0 0 0 3px var(--noche),0 0 0 5px currentColor}
+.hitos b{color:var(--on-noche)}
+.login .card{background:var(--porcelana);color:var(--noche);box-shadow:none}
+.login .card label{color:#4a5578}
+.login .card input{background:#fff;border-color:#d5d0c3;color:var(--noche)}
+.login .card .muted{color:#4a5578}
+.login .card input::placeholder{color:#5a6488}
+.login .aviso{color:var(--on-noche-mut)}
+.login .btn.ghost{color:var(--on-noche);border-color:var(--noche-3)}
+.login h3{color:var(--noche)}
 .empty{text-align:center;padding:28px 8px;color:var(--mut)}
-.spin{display:inline-block;width:22px;height:22px;border:2.5px solid var(--line);border-top-color:var(--pri);border-radius:50%;animation:sp .8s linear infinite}
+.spin{display:inline-block;width:22px;height:22px;border:2.5px solid var(--line);border-top-color:var(--linea);border-radius:50%;animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .spin{animation-duration:1.6s!important;animation-iteration-count:infinite!important}
 }
-@media (max-width:370px){.light{width:92px;height:92px;border-radius:24px}.light b{font-size:44px}.ring svg{width:78px;height:78px}.ring b{top:23px;font-size:22px}.estado{font-size:22px}.login h1{font-size:38px}}
+@media (max-width:370px){.light{width:78px;height:78px}.light b{font-size:40px}.estado{font-size:22px}.login h1{font-size:34px}.est span{font-size:11px}}
+@media (min-width:600px){main#view{padding:0 20px}.linea-nivel{margin:0 -20px}}
 </style>
 </head>
 <body>
@@ -207,7 +258,34 @@ const SB_URL = 'https://hpvqtcgmfnssiizvonnw.supabase.co';
 const SB_KEY = 'sb_publishable_ts7GLoMIQLWCVif0eFA3Ng_OLZahFes';
 const sb = window.supabase.createClient(SB_URL, SB_KEY, { db: { schema: 'evolva' } });
 
-const LOGO = `<svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#2563eb"/><path d="M14 44 L26 32 L34 38 L50 20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="20" r="5.5" fill="#fb923c"/></svg>`;
+// Marca: un tramo de línea con tres estaciones (los tres niveles), la última por alcanzar.
+const LOGO = `<svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="9" fill="#f4f1ea"/><path d="M7 27 L16 18 H33" fill="none" stroke="var(--linea)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="27" r="4.2" fill="#f4f1ea" stroke="#0e1a3a" stroke-width="2.6"/><circle cx="20" cy="18" r="4.2" fill="#f4f1ea" stroke="#0e1a3a" stroke-width="2.6"/><circle cx="33" cy="18" r="4.2" fill="#0e1a3a"/></svg>`;
+// Pictogramas de ejercicio al estilo de la señalética del Metro: figura de trazo redondo, blanca sobre la placa de la línea.
+const pic = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const PICTO = {
+  'Piernas': pic('<circle cx="8.5" cy="4.6" r="2" fill="currentColor" stroke="none"/><path d="M9 7.4 10.8 13H16.2L15.2 20M9.6 9.2H15.4M3 21h18"/>'),
+  'Pecho': pic('<circle cx="4.6" cy="9.2" r="2" fill="currentColor" stroke="none"/><path d="M6.6 10.4 19.6 14.6M8.4 11 8.4 17.4M19.6 14.6 20.4 17.4M3 18.4h18"/>'),
+  'Espalda': pic('<circle cx="12" cy="6.2" r="2" fill="currentColor" stroke="none"/><path d="M4 2.6h16M7.2 2.6 9.2 8.4 12 9M16.8 2.6 14.8 8.4 12 9M12 8.6V15M12 15 9.8 21M12 15l2.2 6"/>'),
+  'Glúteos': pic('<circle cx="4" cy="14.6" r="2" fill="currentColor" stroke="none"/><path d="M5.8 15.8 12.4 10.4 16.6 11.4 17.4 17.4M8 16.6 8.6 17.6M3 18.6h18"/>'),
+  'Core': pic('<circle cx="4.8" cy="10.6" r="2" fill="currentColor" stroke="none"/><path d="M6.8 12 20 14.2M7.2 12.4 7.2 16.2H10.4M20 14.2 20.6 16.6M3 17.4h18"/>'),
+  'Hombros': pic('<circle cx="12" cy="7.2" r="2" fill="currentColor" stroke="none"/><path d="M5 3h14M8 3V8.6L12 10M16 3V8.6L12 10M12 9.6V15.4M12 15.4 9.8 21M12 15.4l2.2 5.6"/>'),
+  'Isquiotibiales': pic('<circle cx="5.6" cy="6.8" r="2" fill="currentColor" stroke="none"/><path d="M7.4 8.2 14.4 11.8M14.4 11.8 14.2 20.6M9 9.4 9 15.4M6.4 15.8h5.2"/>'),
+  'Cadena posterior': pic('<circle cx="5.6" cy="6.8" r="2" fill="currentColor" stroke="none"/><path d="M7.4 8.2 14.4 11.8M14.4 11.8 14.2 20.6M9 9.4 9 16.4M5 16.8h8"/>'),
+  'Cardio': pic('<circle cx="13.4" cy="3.8" r="2" fill="currentColor" stroke="none"/><path d="M13 6.4 11 12.2M12.6 8.2 16.4 9.6M12.2 8.4 8.8 10.6M11 12.2 15 15.2 14 20.6M11 12.2 8 16.2 4.8 15.4"/>'),
+  'Movilidad': pic('<circle cx="12" cy="4" r="2" fill="currentColor" stroke="none"/><path d="M12 6.6V13M12 8.4 6 4.6M12 8.4 18 4.6M12 13 6.6 20.6M12 13l5.4 7.6"/>'),
+  'Cuerpo completo': pic('<circle cx="12" cy="3.6" r="2" fill="currentColor" stroke="none"/><path d="M12 6.2V13M12 7.6 8 2.6M12 7.6l4-5M12 13 8.8 18.4M12 13l3.2 5.4M3 21h18"/>')
+};
+const pictograma = g => PICTO[g] || pic('<path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/>');
+// Firma: el avance de nivel como tramo de Metro. Estaciones = niveles; el tren marca el avance.
+function lineaNivel(nivel, progreso, { etiqueta = true } = {}) {
+  const idx = NIVELES.indexOf(nivel), p = Math.max(0, Math.min(100, progreso || 0));
+  const fin = idx >= 2 ? 100 : idx * 50 + p / 2;
+  const sig = NIVELES[idx + 1];
+  const aria = sig ? `Estación ${NIVEL_TX[nivel]}, ${r0(p)}% del tramo hacia ${NIVEL_TX[sig]}` : `Estación ${NIVEL_TX[nivel]}, nivel más alto`;
+  return `<div class="linea-nivel" role="img" aria-label="${aria}"><div class="riel"><b style="width:${fin}%"></b>
+    ${NIVELES.map((n, i) => `<i class="est ${i < idx ? 'ok' : ''} ${i === idx ? 'aqui' : ''}" style="left:${i * 50}%"><span>${NIVEL_TX[n]}</span></i>`).join('')}
+    ${etiqueta && sig ? `<em class="tren" style="left:${fin}%;font-style:normal">${r0(p)}%</em>` : ''}</div></div>`;
+}
 // Íconos SVG de una sola familia (trazo 2, estilo Lucide). Decorativos: aria-hidden.
 const svg = (d, extra = '') => `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${d}</svg>`;
 const IC = {
@@ -278,13 +356,14 @@ function vLogin(msg) {
   $('#root').innerHTML = `
   <div class="login">
     <div class="row">${LOGO}<span class="wordmark">Evolva</span></div>
-    <h1>Entrena por niveles. <em>Mide si evolucionas.</em></h1>
-    <p class="muted" style="margin:0">Entrenamiento y alimentación en un solo lugar, con un semáforo semanal que te dice si avanzas.</p>
-    <div class="feats">
-      <div class="feat"><div class="fi" style="background:color-mix(in srgb,var(--verde) 18%,var(--card));color:var(--verde)">${IC.semaforo}</div><div><b>Semáforo semanal</b><span>Cruza entrenamiento, nutrición y cuerpo, y te explica el porqué.</span></div></div>
-      <div class="feat"><div class="fi" style="background:color-mix(in srgb,var(--pri) 18%,var(--card));color:var(--pri)">${IC.niveles}</div><div><b>Progresión asistida</b><span>Reglas claras para subir, mantener o bajar de nivel.</span></div></div>
-      <div class="feat"><div class="fi" style="background:color-mix(in srgb,var(--nutri) 18%,var(--card));color:var(--nutri)">${IC.plato}</div><div><b>Metas de alimentación</b><span>Calorías y proteína según tu objetivo, con un piso seguro.</span></div></div>
-    </div>
+    <h1>Tu entrenamiento, <em>estación por estación.</em></h1>
+    <p class="lead">Subes de nivel cuando las reglas lo confirman, y cada semana sabes si tu servicio corre normal, con demoras o interrumpido, y por qué.</p>
+    ${lineaNivel('principiante', 64)}
+    <ul class="hitos">
+      <li><i style="background:var(--verde)"></i><span><b>Semáforo semanal.</b> Cruza entrenamiento, alimentación y cuerpo.</span></li>
+      <li><i style="background:var(--linea)"></i><span><b>Tres estaciones.</b> Principiante, Intermedio y Avanzado, con reglas claras.</span></li>
+      <li><i style="background:var(--nutri)"></i><span><b>Metas de comida.</b> Calorías y proteína con un piso seguro.</span></li>
+    </ul>
     <div class="card">
       <form id="f-login">
         <label for="email">Correo</label>
@@ -318,8 +397,8 @@ function vSinAcceso(perfil) {
   $('#root').innerHTML = `
   <div class="login">
     <div class="row">${LOGO}<span class="wordmark">Evolva</span></div>
-    <h1>Activa tu <em>suscripción</em> para entrenar.</h1>
-    <p class="muted" style="margin:0">Evolva es parte de Apps One. Con un plan vigente tienes rutinas por niveles, metas de alimentación y tu semáforo semanal.</p>
+    <h1>Activa tu <em>pase</em> para abordar.</h1>
+    <p class="lead">Evolva es parte de Apps One. Con un plan vigente tienes rutinas por niveles, metas de alimentación y tu semáforo semanal.</p>
     <div class="card" style="margin-top:22px">
       <a class="btn full" href="https://apps-one-omega.vercel.app" target="_blank" rel="noopener">Ver planes en Apps One</a>
       <button class="btn sec full" id="sa-revisar" style="margin-top:10px">Ya me suscribí, revisar de nuevo</button>
@@ -454,7 +533,7 @@ function vOnboarding() {
 
 // ---------- estructura ----------
 const ICON = {
-  inicio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>',
+  inicio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><circle cx="7" cy="12" r="3" fill="var(--noche)"/><circle cx="17" cy="12" r="3" fill="currentColor"/></svg>',
   rutina: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></svg>',
   comida: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M3 3v8a2 2 0 0 0 2 2M17 21V3c2 1 4 4 4 8h-4"/></svg>',
   progreso: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 16l4-5 4 3 6-8"/></svg>',
@@ -463,6 +542,7 @@ const ICON = {
 const TABS = [['inicio', 'Inicio'], ['rutina', 'Rutina'], ['comida', 'Comida'], ['progreso', 'Progreso'], ['perfil', 'Perfil']];
 
 function vApp() {
+  document.documentElement.dataset.obj = S.perfil.objetivo;
   $('#root').innerHTML = `
   <div class="app">
     <header class="top">${LOGO}<h1>Evolva</h1><div class="sub">${subHeader()}</div></header>
@@ -473,9 +553,10 @@ function vApp() {
   ir(S.tab);
 }
 function subHeader() {
-  return `<span class="badge">${NIVEL_TX[S.perfil.nivel]}</span><span>${OBJ_TX[S.perfil.objetivo]}${S.perfil.nombre ? ' · ' + esc(S.perfil.nombre) : ''}</span>`;
+  return `<span class="badge"><i></i>${NIVEL_TX[S.perfil.nivel]}</span><span>Línea ${OBJ_TX[S.perfil.objetivo]}</span>`;
 }
 function refrescarHeader() {
+  document.documentElement.dataset.obj = S.perfil.objetivo;
   const s = $('header.top .sub'); if (s) s.innerHTML = subHeader();
 }
 function ir(tab) {
@@ -493,11 +574,7 @@ function ir(tab) {
 }
 
 // ---------- componentes visuales ----------
-function ring(pct, color, label) {
-  const r = 34, c = 2 * Math.PI * r, p = Math.max(0, Math.min(100, pct || 0));
-  return `<div class="ring"><svg viewBox="0 0 80 80" role="img" aria-label="${label} ${r0(p)} de 100"><circle cx="40" cy="40" r="${r}" class="trk"/><circle cx="40" cy="40" r="${r}" class="val" style="--c:${c.toFixed(1)}" stroke="${color}" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${(c * (1 - p / 100)).toFixed(1)}" transform="rotate(-90 40 40)"/></svg><b>${r0(p)}</b><span>${label}</span></div>`;
-}
-function chart(series, { h = 170, fmtY = v => v, unidad = '' } = {}) {
+function chart(series, { h = 170, fmtY = v => v, unidad = '', enteros = false } = {}) {
   const all = series.flatMap(s => s.pts);
   if (all.length < 2) return `<p class="empty small">Aún no hay datos suficientes para el gráfico.</p>`;
   const W = 360, H = Math.round(h * 0.62), P = { l: 34, r: 8, t: 10, b: 20 };
@@ -506,6 +583,7 @@ function chart(series, { h = 170, fmtY = v => v, unidad = '' } = {}) {
   if (x0 === x1) { x0 -= 864e5; x1 += 864e5; }
   if (y0 === y1) { y0 -= 1; y1 += 1; }
   const pad = (y1 - y0) * 0.12; const sinNeg = y0 >= 0; y0 -= pad; y1 += pad; if (sinNeg) y0 = Math.max(0, y0);
+  if (enteros) { y0 = Math.floor(y0); y1 = Math.ceil(y1); while ((y1 - y0) % 3) y1++; }
   const X = x => P.l + (x - x0) / (x1 - x0) * (W - P.l - P.r);
   const Y = y => H - P.b - (y - y0) / (y1 - y0) * (H - P.t - P.b);
   let g = '';
@@ -521,7 +599,7 @@ function chart(series, { h = 170, fmtY = v => v, unidad = '' } = {}) {
     const dots = s.dots ? s.pts.map(p => `<circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="3" fill="${s.color}"><title>${fx(p.x)}: ${r1(p.y)} ${unidad}</title></circle>`).join('') : '';
     return `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w || 2.5}" ${s.dash ? 'stroke-dasharray="5 5"' : ''} stroke-linejoin="round" stroke-linecap="round" opacity="${s.op || 1}"/>${dots}`;
   }).join('');
-  const leg = series.filter(s => s.label).map(s => `<span><i style="background:${s.color}"></i>${s.label}</span>`).join('');
+  const leg = series.filter(s => s.label).map(s => `<span><i style="background:${s.color};${s.dots && s.w && s.w < 2 ? 'width:8px;height:8px;border-radius:50%' : ''}"></i>${s.label}</span>`).join('');
   return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img">${g}${paths}</svg>${leg ? `<div class="legend">${leg}</div>` : ''}`;
 }
 const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -549,44 +627,40 @@ async function vInicio() {
   const accion = e.decision === 'subir' && sig ? `<button class="btn" data-nivel="${sig}" style="margin-top:10px">Subir a ${NIVEL_TX[sig]}</button>`
     : e.decision === 'bajar' && ant ? `<button class="btn sec" data-nivel="${ant}" style="margin-top:10px">Cambiar a ${NIVEL_TX[ant]}</button>` : '';
   const motivos = e.motivos || [];
+  const SERV = { verde: 'Servicio normal', amarillo: 'Servicio con demoras', rojo: 'Servicio interrumpido' };
+  const fechasSes = new Set((ses.data || []).map(r => r.fecha));
+  const diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((l, i) => { const f = sumaDias(semana, i); return { l, f, ok: fechasSes.has(f), hoy: f === hoy() }; });
 
   $('#view').innerHTML = `
-    <div class="card hero-score" style="--sem:var(--${e.color})">
-      <div class="row between" style="align-items:baseline"><h2>Tu semana</h2><span class="small muted">desde el ${fCorta(semana)}</span></div>
-      <div class="score" style="margin-top:12px">
-        <div class="light ${e.color}" role="img" aria-label="Puntaje ${e.puntaje} de 100, ${COLOR_TX[e.color]}"><b>${e.puntaje}</b><span>de 100</span></div>
-        <div>
-          <div class="estado">${COLOR_TX[e.color]}</div>
-          <div class="row small muted" style="gap:6px;margin-top:4px">${e.color === 'verde' ? IC.sube : e.color === 'rojo' ? IC.baja : IC.igual}<span>${e.color === 'verde' ? '70 o más' : e.color === 'amarillo' ? 'Entre 45 y 69' : 'Menos de 45'}</span></div>
-          <div class="dots" aria-hidden="true"><i class="verde ${e.color === 'verde' ? 'on' : ''}"></i><i class="amarillo ${e.color === 'amarillo' ? 'on' : ''}"></i><i class="rojo ${e.color === 'rojo' ? 'on' : ''}"></i></div>
-        </div>
+    ${lineaNivel(S.perfil.nivel, e.progreso_nivel)}
+    <section class="placa" aria-label="Estado de tu semana">
+      <div class="light ${e.color}" role="img" aria-label="Puntaje ${e.puntaje} de 100"><b>${e.puntaje}</b><span>de 100</span></div>
+      <div class="estado">${COLOR_TX[e.color]}</div>
+      <div class="servicio">${e.color === 'verde' ? IC.sube : e.color === 'rojo' ? IC.baja : IC.igual}${SERV[e.color]} · semana del ${fCorta(semana)}</div>
+      <div class="motivo">${motivos.length ? `<b>${esc(motivos[0])}</b>${motivos.length > 1 ? `<ul>${motivos.slice(1).map(m => `<li>${esc(m)}</li>`).join('')}</ul>` : ''}` : '<b>Todo corre a tiempo esta semana.</b>'}</div>
+    </section>
+    <section class="sec">
+      <div class="row between" style="align-items:baseline"><h2>Ramales</h2><span class="small muted">peso en el puntaje</span></div>
+      <div class="ramales">
+        ${[['Entrenamiento', e.puntaje_entreno, '40%', 'var(--tx)'], ['Nutrición', e.puntaje_nutricion, '30%', 'var(--tx)'], ['Cuerpo', e.puntaje_cuerpo, '30%', 'var(--tx)']].map(([n, v, w, c]) =>
+          `<div class="ramal"><span>${n} · ${w}</span><b>${v}</b><div class="t" role="img" aria-label="${n} ${v} de 100"><i style="--p:${v};background:${c}"></i></div></div>`).join('')}
       </div>
-      <div class="kpis">
-        <div class="kpi"><span style="color:var(--nutri)">${IC.llama}</span><div><b>${racha}</b><span>${racha === 1 ? 'día de racha' : 'días de racha'}</span></div></div>
-        <div class="kpi"><span style="color:var(--entreno)">${IC.pesa}</span><div><b>${e.sesiones}<small style="font-size:16px;color:var(--mut)">/3</small></b><span>sesiones esta semana</span></div></div>
+    </section>
+    <section class="sec">
+      <div class="row between" style="align-items:baseline"><h2>Esta semana</h2><span class="small muted">${diasSemana.filter(d => d.ok).length} ${diasSemana.filter(d => d.ok).length === 1 ? 'día' : 'días'} · meta 3 · racha ${racha}</span></div>
+      <div class="semana" role="list" aria-label="Sesiones de la semana">${diasSemana.map(d => `<div class="dia ${d.ok ? 'ok' : ''} ${d.hoy ? 'hoy' : ''}" role="listitem" aria-label="${d.l}${d.ok ? ', entrenaste' : ''}${d.hoy ? ', hoy' : ''}"><i></i>${d.l}</div>`).join('')}</div>
+    </section>
+    <section class="sec">
+      <div class="letrero ${decCls}">
+        <h2>${sig ? `Próxima estación: ${NIVEL_TX[sig]}` : 'Última estación'}</h2>
+        <p style="margin:8px 0 0"><b>${decTit}.</b> ${esc(e.motivo_decision || '')}</p>
+        ${accion}
       </div>
-      ${motivos.length ? `<div class="alert ${e.color === 'rojo' ? 'bad' : e.color === 'amarillo' ? 'warn' : ''}" style="margin-top:14px"><b>${esc(motivos[0])}</b>${motivos.length > 1 ? `<ul class="mot small">${motivos.slice(1).map(m => `<li>${esc(m)}</li>`).join('')}</ul>` : ''}</div>`
-      : `<div class="alert good" style="margin-top:14px"><b>Vas muy bien esta semana.</b> Sigue así.</div>`}
-    </div>
-    <div class="card">
-      <div class="rings">
-        ${ring(e.puntaje_entreno, cssVar('--entreno'), 'Entrenamiento')}
-        ${ring(e.puntaje_nutricion, cssVar('--nutri'), 'Nutrición')}
-        ${ring(e.puntaje_cuerpo, cssVar('--cuerpo'), 'Cuerpo')}
-      </div>
-      <p class="small muted" style="margin:10px 0 0;text-align:center">Entrenamiento 40% · Nutrición 30% · Cuerpo 30%</p>
-    </div>
-    <div class="card">
-      <div class="row between"><h3>${sig ? `Avance a ${NIVEL_TX[sig]}` : 'Nivel máximo'}</h3><b>${e.progreso_nivel}%</b></div>
-      <div class="bar" style="margin-top:8px"><i style="--p:${e.progreso_nivel}"></i></div>
-      <div class="alert ${decCls}" style="margin-top:12px"><b>${decTit}</b><div class="small" style="margin-top:4px">${esc(e.motivo_decision || '')}</div>${accion}</div>
-      <p class="small muted" style="margin:10px 0 0">Para subir: adherencia ≥ 85% en 3 semanas, techo de repeticiones en todas las series y esfuerzo promedio (RPE) de 7 o menos.</p>
-    </div>
-    <div class="row" style="gap:8px">
+    </section>
+    <div class="row" style="gap:8px;margin:18px 0 8px">
       <button class="btn full" data-ir="rutina">Entrenar hoy</button>
       <button class="btn sec full" data-ir="comida">Registrar comida</button>
-    </div>
-    <p class="aviso">Evolva no reemplaza a un profesional de la salud. Ante dolor o lesiones, consulta a un médico.</p>`;
+    </div>`;
   $('#view').onclick = async ev2 => {
     const n = ev2.target.closest('[data-nivel]'); const g = ev2.target.closest('[data-ir]');
     if (g) return ir(g.dataset.ir);
@@ -621,7 +695,8 @@ async function vRutina(nivelVer, diaVer) {
   const ultimo = {};
   (prev || []).forEach(s => { const u = ultimo[s.ejercicio_id]; if (!u) ultimo[s.ejercicio_id] = { sesion: s.sesion_id, fecha: s.sesiones?.fecha, series: [s] }; else if (u.sesion === s.sesion_id) u.series.push(s); });
 
-  const { data: ev } = await sb.from('evaluaciones_semanales').select('progreso_nivel, decision').eq('semana', lunes(hoy())).maybeSingle();
+  // Misma fuente en vivo que Inicio, para que el avance sea un solo número en toda la app.
+  const { data: ev } = await sb.rpc('evaluar_mi_semana', { p_semana: hoy() });
   const borr = leerLS(BORRADOR, {})[rut.id] || {};
   const cola = leerLS(COLA, []);
   const viendoOtro = nivel !== S.perfil.nivel;
@@ -640,7 +715,8 @@ async function vRutina(nivelVer, diaVer) {
         <select data-k="${e.id}_${i + 1}" data-f="rpe" aria-label="esfuerzo serie ${i + 1}"><option value="">RPE</option>${Array.from({ length: 10 }, (_, j) => `<option ${String(b.rpe) === String(j + 1) ? 'selected' : ''}>${j + 1}</option>`).join('')}</select>`;
     }).join('');
     return `<div class="ex" data-ej="${e.id}" data-series="${re.series}">
-      <div class="row" style="align-items:flex-start;gap:12px"><div class="num" aria-hidden="true">${idx + 1}</div><div><h3>${esc(e.nombre)}</h3><div class="meta">${esc(e.grupo_muscular)} · ${re.series} series de ${re.reps_min}–${re.reps_max} ${UNIDAD_TX[e.unidad]}</div></div></div>
+      <div class="picto" role="img" aria-label="${esc(e.grupo_muscular)}">${pictograma(e.grupo_muscular)}</div><span class="num" aria-hidden="true">${idx + 1}</span>
+      <h3>${esc(e.nombre)}</h3><div class="meta">${esc(e.grupo_muscular)} · ${re.series} series de ${re.reps_min}–${re.reps_max} ${UNIDAD_TX[e.unidad]}</div>
       <div class="small muted" style="margin-top:4px">${esc(e.descripcion || '')}</div>
       ${f || dif ? `<div class="var">${f ? `Más fácil: ${esc(f.nombre)}` : ''}${f && dif ? ' · ' : ''}${dif ? `Más difícil: ${esc(dif.nombre)}` : ''}</div>` : ''}
       ${uTxt ? `<div class="last">${esc(uTxt)}</div>` : ''}
@@ -649,27 +725,29 @@ async function vRutina(nivelVer, diaVer) {
   }).join('');
 
   $('#view').innerHTML = `
-    <div class="card">
+    ${ev ? lineaNivel(S.perfil.nivel, ev.progreso_nivel) : ''}
+    <section class="sec">
       <h2>Rutina de ${OBJ_TX[S.perfil.objetivo].toLowerCase()}</h2>
       <label>Nivel</label>
       <div class="chips" id="r-niv" role="group" aria-label="Nivel">${NIVELES.map(k => `<button class="chip ${k === nivel ? 'on' : ''} ${k === S.perfil.nivel ? 'actual' : ''}" aria-pressed="${k === nivel}" data-v="${k}">${NIVEL_TX[k]}</button>`).join('')}</div>
       <label>Día</label>
       <div class="chips" id="r-dia" role="group" aria-label="Día">${['A', 'B'].map(k => `<button class="chip ${k === dia ? 'on' : ''}" aria-pressed="${k === dia}" data-v="${k}">Día ${k}</button>`).join('')}</div>
       ${viendoOtro ? `<div class="alert warn" style="margin-top:12px">Estás viendo ${NIVEL_TX[nivel]}. Tu nivel actual es ${NIVEL_TX[S.perfil.nivel]}.<br><button class="btn sec" id="r-cambiar" style="margin-top:8px">Cambiar mi nivel a ${NIVEL_TX[nivel]}</button></div>` : ''}
-      ${ev && !viendoOtro ? `<div style="margin-top:12px"><div class="row between small"><span>${ev.decision === 'subir' ? '¡Listo para subir de nivel!' : 'Avance al siguiente nivel'}</span><b>${ev.progreso_nivel}%</b></div><div class="bar" style="margin-top:6px"><i style="--p:${ev.progreso_nivel}"></i></div></div>` : ''}
+      ${ev && !viendoOtro && ev.decision === 'subir' ? `<div class="alert good" style="margin-top:12px"><b>Listo para la próxima estación.</b> Cumpliste las reglas para subir de nivel.</div>` : ''}
       ${cola.length ? `<div class="alert warn small" style="margin-top:12px">${cola.length} ${cola.length === 1 ? 'sesión pendiente' : 'sesiones pendientes'} de sincronizar.</div>` : ''}
-    </div>
-    <div class="card" id="r-ej">
-      <div class="small muted" style="margin-bottom:6px">${esc(rut.nombre)} · registra repeticiones (o segundos/minutos), la carga y tu esfuerzo percibido del 1 al 10.</div>
-      ${exHtml}
-    </div>
-    <div class="card">
+    </section>
+    <section class="sec" id="r-ej">
+      <div class="row between" style="align-items:baseline"><h2>Ruta de hoy</h2><span class="small muted">${esc(rut.nombre)}</span></div>
+      <p class="small muted" style="margin:4px 0 0">Anota repeticiones (o segundos), carga y esfuerzo del 1 al 10.</p>
+      <div class="ruta">${exHtml}</div>
+    </section>
+    <section class="sec" style="padding-bottom:16px">
       <label class="check"><input type="checkbox" id="r-dolor"> Sentí dolor durante la sesión</label>
       <label for="r-nota">Nota (opcional)</label>
       <input id="r-nota" placeholder="Cómo te sentiste">
       <button class="btn full" id="r-guardar" style="margin-top:14px">Guardar sesión</button>
-      <p class="small muted" style="margin:8px 0 0">Si no tienes conexión, la sesión se guarda en el teléfono y se sincroniza al volver.</p>
-    </div>`;
+      <p class="small muted" style="margin:8px 0 0">Sin conexión, la sesión se guarda en el teléfono y se sincroniza al volver.</p>
+    </section>`;
 
   $('#r-niv').onclick = e => { const b = e.target.closest('.chip'); if (b) vRutina(b.dataset.v, dia); };
   $('#r-dia').onclick = e => { const b = e.target.closest('.chip'); if (b) vRutina(nivel, b.dataset.v); };
@@ -758,28 +836,24 @@ async function vComida() {
   const tot = (regs || []).reduce((t, r) => ({ kcal: t.kcal + +r.kcal, proteina: t.proteina + +r.proteina, carbos: t.carbos + +r.carbos, grasas: t.grasas + +r.grasas }), { kcal: 0, proteina: 0, carbos: 0, grasas: 0 });
   const m = S.meta || {};
   const pctK = m.kcal ? tot.kcal / m.kcal * 100 : 0;
-  const colK = pctK > 115 ? cssVar('--rojo') : pctK >= 90 ? cssVar('--verde') : cssVar('--nutri');
+  const colK = pctK > 115 ? cssVar('--rojo') : pctK >= 90 ? cssVar('--verde') : cssVar('--tx');
   const esHoy = f === hoy();
 
   $('#view').innerHTML = `
-    <div class="card">
+    <section class="sec">
       <div class="row between">
         <button class="btn ghost icon" id="c-ant" aria-label="Día anterior">${IC.izq}</button>
         <h2 style="text-transform:capitalize;font-size:16px">${esHoy ? 'Hoy' : esc(fLarga(f))}</h2>
         <button class="btn ghost icon" id="c-sig" aria-label="Día siguiente" ${esHoy ? 'disabled' : ''}>${IC.der}</button>
       </div>
-      <div class="row" style="margin-top:12px;gap:14px">
-        ${ring(pctK, colK, 'Calorías').replace(`<b>${r0(Math.min(pctK, 100))}</b>`, `<b style="font-size:22px">${r0(tot.kcal)}</b>`)}
-        <div style="flex:1">
-          <div class="small muted">Meta ${m.kcal ?? '—'} kcal</div>
-          ${macroBar('Proteína', tot.proteina, m.proteina_g, cssVar('--pri'))}
-          ${macroBar('Carbohidratos', tot.carbos, m.carbos_g, cssVar('--nutri'))}
-          ${macroBar('Grasas', tot.grasas, m.grasas_g, cssVar('--cuerpo'))}
-        </div>
-      </div>
-    </div>
-    ${esHoy ? `<div class="card"><h3>Sugerencia</h3><p style="margin:6px 0 0">${esc(sugerencia(tot))}</p></div>` : ''}
-    <div class="card" id="c-meals">
+      <div class="kcal" style="margin-top:14px"><b>${r0(tot.kcal)}</b><span class="muted">de ${m.kcal ?? '—'} kcal</span></div>
+      <div class="bar" style="margin-top:8px" role="img" aria-label="Calorías ${r0(pctK)}% de la meta"><i style="--p:${Math.min(pctK, 100)};background:${colK}"></i></div>
+      ${macroBar('Proteína', tot.proteina, m.proteina_g, cssVar('--tx'))}
+      ${macroBar('Carbohidratos', tot.carbos, m.carbos_g, cssVar('--tx'))}
+      ${macroBar('Grasas', tot.grasas, m.grasas_g, cssVar('--tx'))}
+    </section>
+    ${esHoy ? `<section class="sec"><h2>Para tu próxima comida</h2><p style="margin:6px 0 0">${esc(sugerencia(tot))}</p></section>` : ''}
+    <section class="sec" id="c-meals">
       ${COMIDAS.map(c => {
         const it = (regs || []).filter(r => r.comida === c);
         const k = it.reduce((s, r) => s + +r.kcal, 0);
@@ -787,8 +861,7 @@ async function vComida() {
           ${it.length ? '' : `<p class="small muted" style="margin:6px 0 0">Sin registros.</p>`}
           ${it.map(r => `<div class="item"><div>${esc(r.nombre)} <span class="muted small">${r1(r.gramos)} g</span><div class="small muted">${r0(r.kcal)} kcal · P ${r1(r.proteina)} · C ${r1(r.carbos)} · G ${r1(r.grasas)}</div></div><button class="x" data-del="${r.id}" aria-label="Eliminar ${esc(r.nombre)}">${IC.x}</button></div>`).join('')}</div>`;
       }).join('')}
-    </div>
-    <p class="aviso">Las metas usan un piso seguro de calorías. Si buscas cambios grandes o tienes una condición de salud, consulta a un nutricionista.</p>`;
+    </section>`;
 
   $('#c-ant').onclick = () => { S.fechaComida = sumaDias(f, -1); ir('comida'); };
   $('#c-sig').onclick = () => { S.fechaComida = sumaDias(f, 1); ir('comida'); };
@@ -896,7 +969,10 @@ async function vProgreso() {
 
   const ult = M.filter(m => m.peso != null).at(-1);
   $('#view').innerHTML = `
-    <div class="card">
+    <section class="sec"><h2>Historial de la línea</h2><p class="small muted" style="margin:4px 0 0">Cada estación es una semana evaluada.</p>
+      ${(evs.data || []).length ? `<div class="historial">${(evs.data || []).map(e => `<div class="hist"><span class="d" style="border-color:var(--${e.color})" aria-hidden="true"></span><div style="flex:1"><div class="row between"><b>Semana del ${fCorta(e.semana)}</b><b class="p">${e.puntaje}</b></div><div class="small" style="font-weight:700">${COLOR_TX[e.color]} · ${NIVEL_TX[e.nivel]}</div><div class="small muted">Entreno ${e.puntaje_entreno} · Nutrición ${e.puntaje_nutricion} · Cuerpo ${e.puntaje_cuerpo}</div>${(e.motivos || []).length ? `<div class="small" style="margin-top:2px">${esc(e.motivos[0])}</div>` : ''}</div></div>`).join('')}</div>` : '<p class="empty small">Tu primera estación aparecerá al terminar la semana.</p>'}
+    </section>
+    <section class="sec">
       <h2>Registrar medición</h2>
       <form id="m-f">
         <div class="grid2">
@@ -908,14 +984,12 @@ async function vProgreso() {
         <button class="btn full" style="margin-top:12px">Guardar</button>
       </form>
       <p class="small muted" style="margin:8px 0 0">Pésate a la misma hora, idealmente en ayunas. El semáforo usa el promedio de 3 semanas, así un pesaje aislado no te confunde.</p>
-    </div>
-    <div class="card"><h3>Peso</h3>${chart([{ pts: peso, color: cssVar('--cuerpo'), dots: true, op: .45, w: 1.5, label: 'Pesajes' }, { pts: prom, color: cssVar('--cuerpo'), label: 'Promedio 3 semanas' }], { fmtY: v => r1(v), unidad: 'kg' })}</div>
-    ${cint.length > 1 ? `<div class="card"><h3>Cintura</h3>${chart([{ pts: cint, color: cssVar('--nutri'), dots: true }], { fmtY: v => r0(v), unidad: 'cm' })}</div>` : ''}
-    <div class="card"><h3>Volumen de entrenamiento semanal</h3><p class="small muted" style="margin:2px 0 6px">Repeticiones × carga (o repeticiones si es sin carga).</p>${chart([{ pts: vol, color: cssVar('--entreno'), dots: true }], { fmtY: v => v >= 1000 ? r1(v / 1000) + 'k' : r0(v) })}</div>
-    ${conDatos.length ? `<div class="card"><h3>Cargas por ejercicio</h3><select id="p-ej" style="margin-top:8px">${conDatos.map(e => `<option value="${e.id}">${esc(e.nombre)}</option>`).join('')}</select><div id="p-ejg" style="margin-top:8px"></div></div>` : ''}
-    <div class="card"><h3>Historial del semáforo</h3>
-      ${(evs.data || []).length ? (evs.data || []).map(e => `<div class="hist"><span class="d" style="background:var(--${e.color})"></span><div style="flex:1"><div class="row between"><b>Semana del ${fCorta(e.semana)}</b><b>${e.puntaje}</b></div><div class="small muted">Entreno ${e.puntaje_entreno} · Nutrición ${e.puntaje_nutricion} · Cuerpo ${e.puntaje_cuerpo} · ${NIVEL_TX[e.nivel]}</div>${(e.motivos || []).length ? `<div class="small" style="margin-top:2px">${esc(e.motivos[0])}</div>` : ''}</div></div>`).join('') : '<p class="empty small">Tu primera evaluación aparecerá al terminar la semana.</p>'}
-    </div>`;
+    </section>
+    <section class="sec"><h3>Peso</h3>${chart([{ pts: peso, color: cssVar('--mut'), dots: true, op: .7, w: 1.2, label: 'Pesajes' }, { pts: prom, color: cssVar('--linea'), w: 3, label: 'Promedio 3 semanas' }], { fmtY: v => r1(v), unidad: 'kg' })}</section>
+    ${cint.length > 1 ? `<section class="sec"><h3>Cintura</h3>${chart([{ pts: cint, color: cssVar('--tx'), dots: true }], { fmtY: v => r0(v), unidad: 'cm' })}</section>` : ''}
+    <section class="sec"><h3>Volumen de entrenamiento semanal</h3><p class="small muted" style="margin:2px 0 6px">Repeticiones × carga (o repeticiones si es sin carga).</p>${chart([{ pts: vol, color: cssVar('--linea'), dots: true }], { fmtY: v => v >= 1000 ? r1(v / 1000) + 'k' : r0(v) })}</section>
+    ${conDatos.length ? `<section class="sec"><h3>Cargas por ejercicio</h3><select id="p-ej" style="margin-top:8px">${conDatos.map(e => `<option value="${e.id}">${esc(e.nombre)}</option>`).join('')}</select><div id="p-ejg" style="margin-top:8px"></div></section>` : ''}
+    `;
 
   $('#m-f').onsubmit = e => { e.preventDefault(); ocupado(e.target.querySelector('button'), async () => {
     const r = { fecha: $('#m-fe').value || hoy(), peso: num($('#m-p').value), cintura_cm: num($('#m-c').value), grasa_pct: num($('#m-g').value) };
@@ -931,7 +1005,7 @@ async function vProgreso() {
     const porDia = {};
     S2.filter(s => s.ejercicio_id === id).forEach(s => { const v = e.usa_carga ? +s.carga_kg || 0 : +s.reps; porDia[s.sesiones.fecha] = Math.max(porDia[s.sesiones.fecha] || 0, v); });
     const pts = Object.entries(porDia).sort().map(([f, y]) => ({ x: ms(f), y }));
-    $('#p-ejg').innerHTML = chart([{ pts, color: cssVar('--entreno'), dots: true, label: e.usa_carga ? 'Carga máxima (kg)' : `Mejor serie (${UNIDAD_TX[e.unidad]})` }], { fmtY: v => r1(v) });
+    $('#p-ejg').innerHTML = chart([{ pts, color: cssVar('--linea'), dots: true, label: e.usa_carga ? 'Carga máxima (kg)' : `Mejor serie (${UNIDAD_TX[e.unidad]})` }], { fmtY: v => e.usa_carga ? r1(v) : r0(v), enteros: !e.usa_carga });
   };
   if ($('#p-ej')) { $('#p-ej').onchange = pintarEj; pintarEj(); }
 }

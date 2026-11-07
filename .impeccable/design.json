@@ -1,0 +1,1033 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T23:11:41.804Z",
+  "title": "Design System: Evolva",
+  "extensions": {
+    "colorMeta": {
+      "noche": {
+        "role": "neutral",
+        "displayName": "Azul noche esmalte",
+        "canonical": "#0e1a3a",
+        "oklch": "oklch(22.8% 0.064 266)",
+        "cssVar": "--noche",
+        "purpose": "Shell (barra, diagrama de línea, navegación, letrero, cabecera de diálogo, ingreso); tinta en modo claro; suelo en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.024 266)",
+          "oklch(26% 0.043 266)",
+          "oklch(37% 0.056 266)",
+          "oklch(48% 0.063 266)",
+          "oklch(60% 0.063 266)",
+          "oklch(72% 0.057 266)",
+          "oklch(84% 0.043 266)",
+          "oklch(95% 0.024 266)"
+        ]
+      },
+      "noche-2": {
+        "role": "neutral",
+        "displayName": "Azul noche medio",
+        "canonical": "#16244b",
+        "oklch": "oklch(27.2% 0.075 266.6)",
+        "cssVar": "--noche-2",
+        "purpose": "Superficie de placas y diálogos y fondo del letrero en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.027 266.6)",
+          "oklch(26% 0.05 266.6)",
+          "oklch(37% 0.065 266.6)",
+          "oklch(48% 0.073 266.6)",
+          "oklch(60% 0.074 266.6)",
+          "oklch(72% 0.066 266.6)",
+          "oklch(84% 0.05 266.6)",
+          "oklch(95% 0.027 266.6)"
+        ]
+      },
+      "noche-3": {
+        "role": "neutral",
+        "displayName": "Azul noche riel",
+        "canonical": "#26345f",
+        "oklch": "oklch(33.6% 0.078 268.4)",
+        "cssVar": "--noche-3",
+        "purpose": "Riel sin recorrer, borde de estaciones futuras, botones secundarios sobre azul noche.",
+        "tonalRamp": [
+          "oklch(15% 0.029 268.4)",
+          "oklch(26% 0.052 268.4)",
+          "oklch(37% 0.068 268.4)",
+          "oklch(48% 0.077 268.4)",
+          "oklch(60% 0.077 268.4)",
+          "oklch(72% 0.069 268.4)",
+          "oklch(84% 0.052 268.4)",
+          "oklch(95% 0.029 268.4)"
+        ]
+      },
+      "porcelana": {
+        "role": "neutral",
+        "displayName": "Porcelana",
+        "canonical": "#f4f1ea",
+        "oklch": "oklch(95.9% 0.01 87.5)",
+        "cssVar": "--porcelana",
+        "purpose": "Placa de servicio en ambos modos, suelo en modo claro, texto sobre azul noche, centro de estaciones, tren, toast.",
+        "tonalRamp": [
+          "oklch(15% 0.004 87.5)",
+          "oklch(26% 0.007 87.5)",
+          "oklch(37% 0.009 87.5)",
+          "oklch(48% 0.01 87.5)",
+          "oklch(60% 0.01 87.5)",
+          "oklch(72% 0.009 87.5)",
+          "oklch(84% 0.007 87.5)",
+          "oklch(95% 0.004 87.5)"
+        ]
+      },
+      "plate": {
+        "role": "neutral",
+        "displayName": "Porcelana clara",
+        "canonical": "#fbfaf7",
+        "oklch": "oklch(98.5% 0.004 91.4)",
+        "cssVar": "--plate",
+        "purpose": "Campos, chips, tarjetas y diálogos en modo claro.",
+        "tonalRamp": [
+          "oklch(15% 0.002 91.4)",
+          "oklch(26% 0.003 91.4)",
+          "oklch(37% 0.004 91.4)",
+          "oklch(48% 0.004 91.4)",
+          "oklch(60% 0.004 91.4)",
+          "oklch(72% 0.004 91.4)",
+          "oklch(84% 0.003 91.4)",
+          "oklch(95% 0.002 91.4)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Filete arena",
+        "canonical": "#d5d0c3",
+        "oklch": "oklch(85.8% 0.019 89.4)",
+        "cssVar": "--line",
+        "purpose": "Rieles neutros, filetes de sección, bordes de campos y chips, pistas de barras (modo claro).",
+        "tonalRamp": [
+          "oklch(15% 0.007 89.4)",
+          "oklch(26% 0.012 89.4)",
+          "oklch(37% 0.016 89.4)",
+          "oklch(48% 0.018 89.4)",
+          "oklch(60% 0.018 89.4)",
+          "oklch(72% 0.016 89.4)",
+          "oklch(84% 0.012 89.4)",
+          "oklch(95% 0.007 89.4)"
+        ]
+      },
+      "mut": {
+        "role": "neutral",
+        "displayName": "Tinta tenue",
+        "canonical": "#4a5578",
+        "oklch": "oklch(45.5% 0.059 270.5)",
+        "cssVar": "--mut",
+        "purpose": "Texto secundario, etiquetas, ejes, pesajes sueltos (modo claro).",
+        "tonalRamp": [
+          "oklch(15% 0.022 270.5)",
+          "oklch(26% 0.039 270.5)",
+          "oklch(37% 0.052 270.5)",
+          "oklch(48% 0.058 270.5)",
+          "oklch(60% 0.059 270.5)",
+          "oklch(72% 0.052 270.5)",
+          "oklch(84% 0.039 270.5)",
+          "oklch(95% 0.022 270.5)"
+        ]
+      },
+      "on-noche-mut": {
+        "role": "neutral",
+        "displayName": "Tinta tenue sobre noche",
+        "canonical": "#aab3cf",
+        "oklch": "oklch(76.9% 0.041 271.3)",
+        "cssVar": "--on-noche-mut",
+        "purpose": "Texto secundario sobre azul noche y en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.015 271.3)",
+          "oklch(26% 0.028 271.3)",
+          "oklch(37% 0.036 271.3)",
+          "oklch(48% 0.04 271.3)",
+          "oklch(60% 0.041 271.3)",
+          "oklch(72% 0.037 271.3)",
+          "oklch(84% 0.028 271.3)",
+          "oklch(95% 0.015 271.3)"
+        ]
+      },
+      "placa-rule": {
+        "role": "neutral",
+        "displayName": "Filete de placa",
+        "canonical": "#d9d3c4",
+        "oklch": "oklch(86.8% 0.021 88.7)",
+        "purpose": "Borde y filete interior de la placa de servicio.",
+        "tonalRamp": [
+          "oklch(15% 0.008 88.7)",
+          "oklch(26% 0.014 88.7)",
+          "oklch(37% 0.019 88.7)",
+          "oklch(48% 0.021 88.7)",
+          "oklch(60% 0.021 88.7)",
+          "oklch(72% 0.019 88.7)",
+          "oklch(84% 0.014 88.7)",
+          "oklch(95% 0.008 88.7)"
+        ]
+      },
+      "placa-ink-2": {
+        "role": "neutral",
+        "displayName": "Tinta de placa",
+        "canonical": "#3b4669",
+        "oklch": "oklch(40.1% 0.061 270.2)",
+        "purpose": "Motivos secundarios dentro de la placa.",
+        "tonalRamp": [
+          "oklch(15% 0.022 270.2)",
+          "oklch(26% 0.041 270.2)",
+          "oklch(37% 0.053 270.2)",
+          "oklch(48% 0.06 270.2)",
+          "oklch(60% 0.06 270.2)",
+          "oklch(72% 0.054 270.2)",
+          "oklch(84% 0.041 270.2)",
+          "oklch(95% 0.022 270.2)"
+        ]
+      },
+      "linea-fuerza": {
+        "role": "primary",
+        "displayName": "Línea Fuerza, cobalto",
+        "canonical": "#2f6fe4",
+        "oklch": "oklch(56.7% 0.19 261.2)",
+        "cssVar": "--linea",
+        "purpose": "Línea por defecto (--linea): avance, botón principal, chip activo, pictogramas, día entrenado, foco.",
+        "tonalRamp": [
+          "oklch(15% 0.07 261.2)",
+          "oklch(26% 0.127 261.2)",
+          "oklch(37% 0.166 261.2)",
+          "oklch(48% 0.186 261.2)",
+          "oklch(60% 0.188 261.2)",
+          "oklch(72% 0.168 261.2)",
+          "oklch(84% 0.127 261.2)",
+          "oklch(95% 0.07 261.2)"
+        ]
+      },
+      "linea-bajar-grasa": {
+        "role": "primary",
+        "displayName": "Línea Bajar grasa, café",
+        "canonical": "#c0601e",
+        "oklch": "oklch(59.4% 0.144 49.9)",
+        "cssVar": "--linea",
+        "purpose": "--linea cuando data-obj=\"bajar_grasa\".",
+        "tonalRamp": [
+          "oklch(15% 0.053 49.9)",
+          "oklch(26% 0.096 49.9)",
+          "oklch(37% 0.125 49.9)",
+          "oklch(48% 0.141 49.9)",
+          "oklch(60% 0.142 49.9)",
+          "oklch(72% 0.127 49.9)",
+          "oklch(84% 0.096 49.9)",
+          "oklch(95% 0.053 49.9)"
+        ]
+      },
+      "linea-movilidad": {
+        "role": "primary",
+        "displayName": "Línea Movilidad, turquesa",
+        "canonical": "#0f8f9e",
+        "oklch": "oklch(59.6% 0.1 208.1)",
+        "cssVar": "--linea",
+        "purpose": "--linea cuando data-obj=\"movilidad\".",
+        "tonalRamp": [
+          "oklch(15% 0.037 208.1)",
+          "oklch(26% 0.067 208.1)",
+          "oklch(37% 0.087 208.1)",
+          "oklch(48% 0.098 208.1)",
+          "oklch(60% 0.099 208.1)",
+          "oklch(72% 0.089 208.1)",
+          "oklch(84% 0.067 208.1)",
+          "oklch(95% 0.037 208.1)"
+        ]
+      },
+      "on-linea": {
+        "role": "primary",
+        "displayName": "Blanco sobre línea",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100% 0 89.9)",
+        "cssVar": "--on-linea",
+        "purpose": "Texto y pictogramas sobre la línea (modo claro).",
+        "tonalRamp": [
+          "oklch(15% 0 89.9)",
+          "oklch(26% 0 89.9)",
+          "oklch(37% 0 89.9)",
+          "oklch(48% 0 89.9)",
+          "oklch(60% 0 89.9)",
+          "oklch(72% 0 89.9)",
+          "oklch(84% 0 89.9)",
+          "oklch(95% 0 89.9)"
+        ]
+      },
+      "verde": {
+        "role": "secondary",
+        "displayName": "Verde servicio",
+        "canonical": "#1f9d5c",
+        "oklch": "oklch(61.5% 0.144 154.6)",
+        "cssVar": "--verde",
+        "purpose": "Servicio normal. Solo estado del servicio.",
+        "tonalRamp": [
+          "oklch(15% 0.053 154.6)",
+          "oklch(26% 0.096 154.6)",
+          "oklch(37% 0.125 154.6)",
+          "oklch(48% 0.141 154.6)",
+          "oklch(60% 0.142 154.6)",
+          "oklch(72% 0.127 154.6)",
+          "oklch(84% 0.096 154.6)",
+          "oklch(95% 0.053 154.6)"
+        ]
+      },
+      "amarillo": {
+        "role": "secondary",
+        "displayName": "Ámbar servicio",
+        "canonical": "#f2b200",
+        "oklch": "oklch(80.2% 0.165 82.4)",
+        "cssVar": "--amarillo",
+        "purpose": "Servicio con demoras. Solo estado del servicio.",
+        "tonalRamp": [
+          "oklch(15% 0.061 82.4)",
+          "oklch(26% 0.11 82.4)",
+          "oklch(37% 0.144 82.4)",
+          "oklch(48% 0.162 82.4)",
+          "oklch(60% 0.163 82.4)",
+          "oklch(72% 0.146 82.4)",
+          "oklch(84% 0.11 82.4)",
+          "oklch(95% 0.061 82.4)"
+        ]
+      },
+      "rojo": {
+        "role": "secondary",
+        "displayName": "Rojo servicio",
+        "canonical": "#d93025",
+        "oklch": "oklch(57.8% 0.206 29)",
+        "cssVar": "--rojo",
+        "purpose": "Servicio interrumpido, error y eliminar.",
+        "tonalRamp": [
+          "oklch(15% 0.076 29)",
+          "oklch(26% 0.138 29)",
+          "oklch(37% 0.18 29)",
+          "oklch(48% 0.202 29)",
+          "oklch(60% 0.204 29)",
+          "oklch(72% 0.183 29)",
+          "oklch(84% 0.138 29)",
+          "oklch(95% 0.076 29)"
+        ]
+      },
+      "on-verde": {
+        "role": "secondary",
+        "displayName": "Texto sobre verde",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100% 0 89.9)",
+        "cssVar": "--on-verde",
+        "purpose": "Texto en la luz verde.",
+        "tonalRamp": [
+          "oklch(15% 0 89.9)",
+          "oklch(26% 0 89.9)",
+          "oklch(37% 0 89.9)",
+          "oklch(48% 0 89.9)",
+          "oklch(60% 0 89.9)",
+          "oklch(72% 0 89.9)",
+          "oklch(84% 0 89.9)",
+          "oklch(95% 0 89.9)"
+        ]
+      },
+      "on-amarillo": {
+        "role": "secondary",
+        "displayName": "Texto sobre ámbar",
+        "canonical": "#0e1a3a",
+        "oklch": "oklch(22.8% 0.064 266)",
+        "cssVar": "--on-amarillo",
+        "purpose": "Texto azul noche en la luz ámbar.",
+        "tonalRamp": [
+          "oklch(15% 0.024 266)",
+          "oklch(26% 0.043 266)",
+          "oklch(37% 0.056 266)",
+          "oklch(48% 0.063 266)",
+          "oklch(60% 0.063 266)",
+          "oklch(72% 0.057 266)",
+          "oklch(84% 0.043 266)",
+          "oklch(95% 0.024 266)"
+        ]
+      },
+      "on-rojo": {
+        "role": "secondary",
+        "displayName": "Texto sobre rojo",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100% 0 89.9)",
+        "cssVar": "--on-rojo",
+        "purpose": "Texto en la luz roja y el botón de eliminar.",
+        "tonalRamp": [
+          "oklch(15% 0 89.9)",
+          "oklch(26% 0 89.9)",
+          "oklch(37% 0 89.9)",
+          "oklch(48% 0 89.9)",
+          "oklch(60% 0 89.9)",
+          "oklch(72% 0 89.9)",
+          "oklch(84% 0 89.9)",
+          "oklch(95% 0 89.9)"
+        ]
+      },
+      "line-dark": {
+        "role": "neutral",
+        "displayName": "Filete noche",
+        "canonical": "#2b3a68",
+        "oklch": "oklch(36% 0.082 268.5)",
+        "cssVar": "--line",
+        "purpose": "--line en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.03 268.5)",
+          "oklch(26% 0.055 268.5)",
+          "oklch(37% 0.072 268.5)",
+          "oklch(48% 0.08 268.5)",
+          "oklch(60% 0.081 268.5)",
+          "oklch(72% 0.073 268.5)",
+          "oklch(84% 0.055 268.5)",
+          "oklch(95% 0.03 268.5)"
+        ]
+      },
+      "linea-fuerza-dark": {
+        "role": "primary",
+        "displayName": "Línea Fuerza, modo oscuro",
+        "canonical": "#5b8ff0",
+        "oklch": "oklch(65.9% 0.155 261.8)",
+        "cssVar": "--linea",
+        "purpose": "--linea en modo oscuro (fuerza).",
+        "tonalRamp": [
+          "oklch(15% 0.057 261.8)",
+          "oklch(26% 0.104 261.8)",
+          "oklch(37% 0.135 261.8)",
+          "oklch(48% 0.152 261.8)",
+          "oklch(60% 0.154 261.8)",
+          "oklch(72% 0.138 261.8)",
+          "oklch(84% 0.104 261.8)",
+          "oklch(95% 0.057 261.8)"
+        ]
+      },
+      "linea-bajar-grasa-dark": {
+        "role": "primary",
+        "displayName": "Línea Bajar grasa, modo oscuro",
+        "canonical": "#e08a4a",
+        "oklch": "oklch(71.2% 0.132 55.3)",
+        "cssVar": "--linea",
+        "purpose": "--linea en modo oscuro (bajar grasa).",
+        "tonalRamp": [
+          "oklch(15% 0.048 55.3)",
+          "oklch(26% 0.088 55.3)",
+          "oklch(37% 0.115 55.3)",
+          "oklch(48% 0.129 55.3)",
+          "oklch(60% 0.13 55.3)",
+          "oklch(72% 0.117 55.3)",
+          "oklch(84% 0.088 55.3)",
+          "oklch(95% 0.048 55.3)"
+        ]
+      },
+      "linea-movilidad-dark": {
+        "role": "primary",
+        "displayName": "Línea Movilidad, modo oscuro",
+        "canonical": "#2fc1d0",
+        "oklch": "oklch(74.4% 0.118 205.5)",
+        "cssVar": "--linea",
+        "purpose": "--linea en modo oscuro (movilidad).",
+        "tonalRamp": [
+          "oklch(15% 0.043 205.5)",
+          "oklch(26% 0.079 205.5)",
+          "oklch(37% 0.103 205.5)",
+          "oklch(48% 0.116 205.5)",
+          "oklch(60% 0.117 205.5)",
+          "oklch(72% 0.104 205.5)",
+          "oklch(84% 0.079 205.5)",
+          "oklch(95% 0.043 205.5)"
+        ]
+      },
+      "on-linea-dark": {
+        "role": "primary",
+        "displayName": "Tinta sobre línea, modo oscuro",
+        "canonical": "#08112a",
+        "oklch": "oklch(18.6% 0.053 266.3)",
+        "cssVar": "--on-linea",
+        "purpose": "--on-linea en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.019 266.3)",
+          "oklch(26% 0.035 266.3)",
+          "oklch(37% 0.046 266.3)",
+          "oklch(48% 0.052 266.3)",
+          "oklch(60% 0.052 266.3)",
+          "oklch(72% 0.047 266.3)",
+          "oklch(84% 0.035 266.3)",
+          "oklch(95% 0.019 266.3)"
+        ]
+      },
+      "ring-fuerza-dark": {
+        "role": "primary",
+        "displayName": "Anillo de foco Fuerza, oscuro",
+        "canonical": "#9dbaf6",
+        "oklch": "oklch(78.9% 0.092 264.4)",
+        "cssVar": "--ring",
+        "purpose": "--ring en modo oscuro (fuerza).",
+        "tonalRamp": [
+          "oklch(15% 0.034 264.4)",
+          "oklch(26% 0.061 264.4)",
+          "oklch(37% 0.08 264.4)",
+          "oklch(48% 0.09 264.4)",
+          "oklch(60% 0.091 264.4)",
+          "oklch(72% 0.081 264.4)",
+          "oklch(84% 0.061 264.4)",
+          "oklch(95% 0.034 264.4)"
+        ]
+      },
+      "ring-bajar-grasa-dark": {
+        "role": "primary",
+        "displayName": "Anillo de foco Bajar grasa, oscuro",
+        "canonical": "#f0b58a",
+        "oklch": "oklch(81.7% 0.089 57.2)",
+        "cssVar": "--ring",
+        "purpose": "--ring en modo oscuro (bajar grasa).",
+        "tonalRamp": [
+          "oklch(15% 0.033 57.2)",
+          "oklch(26% 0.06 57.2)",
+          "oklch(37% 0.078 57.2)",
+          "oklch(48% 0.088 57.2)",
+          "oklch(60% 0.088 57.2)",
+          "oklch(72% 0.079 57.2)",
+          "oklch(84% 0.06 57.2)",
+          "oklch(95% 0.033 57.2)"
+        ]
+      },
+      "ring-movilidad-dark": {
+        "role": "primary",
+        "displayName": "Anillo de foco Movilidad, oscuro",
+        "canonical": "#8fe2ea",
+        "oklch": "oklch(86.3% 0.081 203.6)",
+        "cssVar": "--ring",
+        "purpose": "--ring en modo oscuro (movilidad).",
+        "tonalRamp": [
+          "oklch(15% 0.03 203.6)",
+          "oklch(26% 0.054 203.6)",
+          "oklch(37% 0.071 203.6)",
+          "oklch(48% 0.08 203.6)",
+          "oklch(60% 0.081 203.6)",
+          "oklch(72% 0.072 203.6)",
+          "oklch(84% 0.054 203.6)",
+          "oklch(95% 0.03 203.6)"
+        ]
+      },
+      "verde-dark": {
+        "role": "secondary",
+        "displayName": "Verde servicio, oscuro",
+        "canonical": "#34c37a",
+        "oklch": "oklch(72.5% 0.16 155.8)",
+        "cssVar": "--verde",
+        "purpose": "--verde en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.059 155.8)",
+          "oklch(26% 0.107 155.8)",
+          "oklch(37% 0.139 155.8)",
+          "oklch(48% 0.157 155.8)",
+          "oklch(60% 0.158 155.8)",
+          "oklch(72% 0.142 155.8)",
+          "oklch(84% 0.107 155.8)",
+          "oklch(95% 0.059 155.8)"
+        ]
+      },
+      "amarillo-dark": {
+        "role": "secondary",
+        "displayName": "Ámbar servicio, oscuro",
+        "canonical": "#ffc629",
+        "oklch": "oklch(85.5% 0.166 86.2)",
+        "cssVar": "--amarillo",
+        "purpose": "--amarillo en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.061 86.2)",
+          "oklch(26% 0.111 86.2)",
+          "oklch(37% 0.145 86.2)",
+          "oklch(48% 0.163 86.2)",
+          "oklch(60% 0.165 86.2)",
+          "oklch(72% 0.147 86.2)",
+          "oklch(84% 0.111 86.2)",
+          "oklch(95% 0.061 86.2)"
+        ]
+      },
+      "rojo-dark": {
+        "role": "secondary",
+        "displayName": "Rojo servicio, oscuro",
+        "canonical": "#ff6a5c",
+        "oklch": "oklch(70.8% 0.185 28)",
+        "cssVar": "--rojo",
+        "purpose": "--rojo en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.068 28)",
+          "oklch(26% 0.123 28)",
+          "oklch(37% 0.161 28)",
+          "oklch(48% 0.181 28)",
+          "oklch(60% 0.183 28)",
+          "oklch(72% 0.163 28)",
+          "oklch(84% 0.123 28)",
+          "oklch(95% 0.068 28)"
+        ]
+      },
+      "on-verde-dark": {
+        "role": "secondary",
+        "displayName": "Texto sobre verde, oscuro",
+        "canonical": "#06210f",
+        "oklch": "oklch(22.1% 0.048 151.7)",
+        "cssVar": "--on-verde",
+        "purpose": "--on-verde en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.018 151.7)",
+          "oklch(26% 0.032 151.7)",
+          "oklch(37% 0.042 151.7)",
+          "oklch(48% 0.047 151.7)",
+          "oklch(60% 0.048 151.7)",
+          "oklch(72% 0.043 151.7)",
+          "oklch(84% 0.032 151.7)",
+          "oklch(95% 0.018 151.7)"
+        ]
+      },
+      "on-amarillo-dark": {
+        "role": "secondary",
+        "displayName": "Texto sobre ámbar, oscuro",
+        "canonical": "#1c1500",
+        "oklch": "oklch(19.9% 0.041 93.2)",
+        "cssVar": "--on-amarillo",
+        "purpose": "--on-amarillo en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.015 93.2)",
+          "oklch(26% 0.027 93.2)",
+          "oklch(37% 0.035 93.2)",
+          "oklch(48% 0.04 93.2)",
+          "oklch(60% 0.04 93.2)",
+          "oklch(72% 0.036 93.2)",
+          "oklch(84% 0.027 93.2)",
+          "oklch(95% 0.015 93.2)"
+        ]
+      },
+      "on-rojo-dark": {
+        "role": "secondary",
+        "displayName": "Texto sobre rojo, oscuro",
+        "canonical": "#2a0606",
+        "oklch": "oklch(19.3% 0.061 24.9)",
+        "cssVar": "--on-rojo",
+        "purpose": "--on-rojo en modo oscuro.",
+        "tonalRamp": [
+          "oklch(15% 0.022 24.9)",
+          "oklch(26% 0.04 24.9)",
+          "oklch(37% 0.053 24.9)",
+          "oklch(48% 0.059 24.9)",
+          "oklch(60% 0.06 24.9)",
+          "oklch(72% 0.054 24.9)",
+          "oklch(84% 0.04 24.9)",
+          "oklch(95% 0.022 24.9)"
+        ]
+      }
+    },
+    "themes": {
+      "light": {
+        "ground": "#f4f1ea",
+        "surface": "#fbfaf7",
+        "ink": "#0e1a3a",
+        "muted": "#4a5578",
+        "line": "#d5d0c3",
+        "shell": "#0e1a3a",
+        "placa": "#f4f1ea",
+        "cardShadow": "var(--sh)"
+      },
+      "dark": {
+        "selector": "@media (prefers-color-scheme: dark) :root:not([data-theme=\"light\"])",
+        "ground": "#0e1a3a",
+        "surface": "#16244b",
+        "ink": "#f4f1ea",
+        "muted": "#aab3cf",
+        "line": "#2b3a68",
+        "shell": "#0e1a3a",
+        "placa": "#f4f1ea",
+        "cardShadow": "none"
+      },
+      "lineByObjective": {
+        "attribute": ":root[data-obj]",
+        "fuerza": {
+          "light": {
+            "linea": "#2f6fe4",
+            "ring": "#2f6fe4",
+            "onLinea": "#ffffff"
+          },
+          "dark": {
+            "linea": "#5b8ff0",
+            "ring": "#9dbaf6",
+            "onLinea": "#08112a"
+          }
+        },
+        "bajar_grasa": {
+          "light": {
+            "linea": "#c0601e",
+            "ring": "#c0601e",
+            "onLinea": "#ffffff"
+          },
+          "dark": {
+            "linea": "#e08a4a",
+            "ring": "#f0b58a",
+            "onLinea": "#08112a"
+          }
+        },
+        "movilidad": {
+          "light": {
+            "linea": "#0f8f9e",
+            "ring": "#0f8f9e",
+            "onLinea": "#ffffff"
+          },
+          "dark": {
+            "linea": "#2fc1d0",
+            "ring": "#8fe2ea",
+            "onLinea": "#08112a"
+          }
+        }
+      },
+      "metaThemeColor": {
+        "light": "#0e1a3a",
+        "dark": "#0b1220"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Puntaje dentro de la luz del semáforo (48px); calorías del día a 44px. 40px bajo 370px."
+      },
+      "display-login": {
+        "displayName": "Display ingreso",
+        "purpose": "Titular de la pantalla de ingreso, con una palabra en la línea. 34px bajo 370px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "h1 de pantalla."
+      },
+      "estado": {
+        "displayName": "Estado",
+        "purpose": "Estado del semáforo en palabras dentro de la placa. 22px bajo 370px."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "h2 de sección."
+      },
+      "title-sm": {
+        "displayName": "Title pequeño",
+        "purpose": "h3, nombre de ejercicio y de comida."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Cifras de ramales, KPI e historial (22–26px)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido y campos (16px para evitar zoom)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Etiquetas de campo y metadatos en tinta tenue."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Estaciones, días L–D, cabeceras de series (mayúsculas 0.06em), tren, pestañas."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "EVOLVA en la barra (20px y 0.08em en el ingreso)."
+      },
+      "fontLoading": {
+        "family": "Overpass",
+        "weights": [
+          400,
+          600,
+          700,
+          800,
+          900
+        ],
+        "source": "Google Fonts, display=swap",
+        "sepFix": "@font-face SepFix: local(Segoe UI|Arial|Helvetica Neue|Roboto), unicode-range U+00B7, primero en cada pila",
+        "numerals": "font-variant-numeric: tabular-nums en body"
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 1px 0 rgba(14,26,58,.06), 0 6px 18px rgba(14,26,58,.07)",
+        "purpose": "Tarjetas de Perfil, onboarding y estados vacíos, solo modo claro (none en oscuro)."
+      },
+      {
+        "name": "placa",
+        "value": "0 10px 28px rgba(14,26,58,.22)",
+        "purpose": "La placa de servicio montada sobre el diagrama de línea. Único objeto que flota."
+      },
+      {
+        "name": "toast",
+        "value": "0 12px 30px rgba(8,14,34,.35)",
+        "purpose": "Toast de porcelana sobre la navegación."
+      },
+      {
+        "name": "knockout",
+        "value": "0 0 0 4px var(--ground)",
+        "purpose": "Recorte sólido del color del suelo alrededor de pictograma, número y estación actual para cortar el riel (no es sombra)."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 3px solid var(--ring); outline-offset: 2px",
+        "purpose": "Foco visible de todo control."
+      },
+      {
+        "name": "input-focus",
+        "value": "0 0 0 3px color-mix(in srgb, var(--linea) 28%, transparent)",
+        "purpose": "Halo de campo enfocado."
+      },
+      {
+        "name": "backdrop",
+        "value": "rgba(8,14,34,.62)",
+        "purpose": "Fondo de diálogo."
+      }
+    ],
+    "motion": [
+      {
+        "name": "t-fast",
+        "value": "140ms",
+        "purpose": "Cambios de estado: color, borde, brillo, halo de foco."
+      },
+      {
+        "name": "t-med",
+        "value": "260ms",
+        "purpose": "Entrada de diálogo y toast, barra de pestaña activa."
+      },
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Curva única de la casa: salida rápida y freno suave, como un tren llegando al andén."
+      },
+      {
+        "name": "press",
+        "value": "transform: scale(.97) en 110ms",
+        "purpose": "Presión de botones y chips."
+      },
+      {
+        "name": "riel-in",
+        "value": "scaleX 0→1, 900ms, origen izquierdo",
+        "purpose": "El tramo recorrido del diagrama de línea entra deslizándose."
+      },
+      {
+        "name": "ramal-fill",
+        "value": "scaleX por --p, 600ms",
+        "purpose": "Relleno de ramales."
+      },
+      {
+        "name": "bar-fill",
+        "value": "scaleX por --p, 500ms",
+        "purpose": "Barras de calorías y macros."
+      },
+      {
+        "name": "dialog-in",
+        "value": "opacity 0 + translateY(14px), 260ms",
+        "purpose": "Entrada de diálogo."
+      },
+      {
+        "name": "toast-in",
+        "value": "opacity 0 + translateY(10px), 260ms",
+        "purpose": "Entrada de toast."
+      },
+      {
+        "name": "spinner",
+        "value": "rotate 360deg, .8s linear infinito",
+        "purpose": "Carga."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce): animation y transition a .01ms, una iteración; el spinner sigue girando a 1.6s",
+        "purpose": "Respeto del movimiento reducido."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "max-width: 370px",
+        "purpose": "Reduce luz del semáforo (78px), puntaje (40px), estado (22px), titular de ingreso (34px) y nombres de estación (11px)."
+      },
+      {
+        "name": "wide",
+        "value": "min-width: 600px",
+        "purpose": "Margen lateral 20px; el diagrama de línea compensa a -20px."
+      },
+      {
+        "name": "column",
+        "value": "560px",
+        "purpose": "Ancho máximo de la columna; shell y diagrama siguen de borde a borde."
+      }
+    ],
+    "pictograms": {
+      "system": "PICTO / pictograma(grupo) en index.html",
+      "viewBox": "0 0 24 24",
+      "stroke": "currentColor, 2.2, round caps y joins; cabeza = círculo lleno r=2",
+      "plate": "48px, radio 10px, fondo var(--linea), glifo 34px en var(--on-linea)",
+      "groups": [
+        "Piernas",
+        "Pecho",
+        "Espalda",
+        "Glúteos",
+        "Core",
+        "Hombros",
+        "Isquiotibiales",
+        "Cadena posterior",
+        "Cardio",
+        "Movilidad",
+        "Cuerpo completo"
+      ],
+      "fallback": "Mancuerna (mismo glifo de la pestaña Rutina)",
+      "pending": "Pictogramas por ejercicio aún no existen."
+    }
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal en la línea del objetivo (\"Entrenar hoy\").",
+      "html": "<button class=\"ds-btn\">Entrenar hoy</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:8px;padding:12px 18px;min-height:48px;background:var(--linea,#2f6fe4);color:var(--on-linea,#fff);font:800 16px/1.2 Overpass,system-ui,sans-serif;letter-spacing:.01em;cursor:pointer;transition:filter 140ms cubic-bezier(.16,1,.3,1),transform 110ms cubic-bezier(.16,1,.3,1)}.ds-btn:hover{filter:brightness(1.08)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:3px solid var(--ring,#2f6fe4);outline-offset:2px}"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "La línea al 14% sobre la superficie (\"Registrar comida\").",
+      "html": "<button class=\"ds-btn-sec\">Registrar comida</button>",
+      "css": ".ds-btn-sec{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;padding:12px 18px;min-height:48px;background:color-mix(in srgb,var(--linea,#2f6fe4) 14%,var(--plate,#fbfaf7));color:var(--tx,#0e1a3a);font:800 16px/1.2 Overpass,system-ui,sans-serif;cursor:pointer;transition:filter 140ms cubic-bezier(.16,1,.3,1),transform 110ms cubic-bezier(.16,1,.3,1)}.ds-btn-sec:hover{filter:brightness(1.08)}.ds-btn-sec:active{transform:scale(.97)}.ds-btn-sec:focus-visible{outline:3px solid var(--ring,#2f6fe4);outline-offset:2px}"
+    },
+    {
+      "name": "Chips de nivel",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Selector de nivel o día; el nivel actual lleva \"· actual\".",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip ds-on\">Principiante<span>· actual</span></button><button class=\"ds-chip\">Intermedio</button></div>",
+      "css": ".ds-chips{display:flex;gap:8px;flex-wrap:wrap}.ds-chip{border:1.5px solid var(--line,#d5d0c3);background:var(--plate,#fbfaf7);color:var(--tx,#0e1a3a);border-radius:999px;padding:8px 14px;min-height:44px;font:600 15px Overpass,system-ui,sans-serif;cursor:pointer;transition:background-color 140ms cubic-bezier(.16,1,.3,1),border-color 140ms cubic-bezier(.16,1,.3,1),transform 110ms}.ds-chip span{margin-left:6px;font-size:12px;font-weight:700;opacity:.85}.ds-chip:hover{border-color:var(--linea,#2f6fe4)}.ds-chip:active{transform:scale(.97)}.ds-chip:focus-visible{outline:3px solid var(--ring,#2f6fe4);outline-offset:2px}.ds-chip.ds-on{background:var(--linea,#2f6fe4);border-color:var(--linea,#2f6fe4);color:var(--on-linea,#fff);font-weight:800}"
+    },
+    {
+      "name": "Campo",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de 48px con halo de la línea al enfocar.",
+      "html": "<label class=\"ds-label\">Peso (kg)<input class=\"ds-input\" placeholder=\"72,5\"></label>",
+      "css": ".ds-label{display:block;font:600 14px Overpass,system-ui,sans-serif;color:var(--mut,#4a5578)}.ds-input{display:block;margin-top:6px;width:100%;box-sizing:border-box;font:16px Overpass,system-ui,sans-serif;min-height:48px;padding:11px 14px;border:1.5px solid var(--line,#d5d0c3);border-radius:8px;background:var(--plate,#fbfaf7);color:var(--tx,#0e1a3a);transition:border-color 140ms cubic-bezier(.16,1,.3,1),box-shadow 140ms cubic-bezier(.16,1,.3,1)}.ds-input::placeholder{color:var(--mut,#4a5578);font-style:italic}.ds-input:focus{outline:none;border-color:var(--linea,#2f6fe4);box-shadow:0 0 0 3px color-mix(in srgb,var(--linea,#2f6fe4) 28%,transparent)}"
+    },
+    {
+      "name": "Navegación inferior",
+      "kind": "nav",
+      "refersTo": "tab-bar",
+      "description": "Barra azul noche fija; la pestaña activa lleva una barra de la línea arriba.",
+      "html": "<nav class=\"ds-tabs\"><button class=\"ds-tab ds-on\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\"><path d=\"M2 12h20\"/><circle cx=\"7\" cy=\"12\" r=\"3\" fill=\"#0e1a3a\"/><circle cx=\"17\" cy=\"12\" r=\"3\" fill=\"currentColor\"/></svg>Inicio</button><button class=\"ds-tab\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12\"/></svg>Rutina</button><button class=\"ds-tab\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 20h18M5 16l4-5 4 3 6-8\"/></svg>Progreso</button></nav>",
+      "css": ".ds-tabs{display:flex;background:var(--noche,#0e1a3a);padding:4px 4px 2px}.ds-tab{flex:1;position:relative;background:none;border:0;padding:8px 0;min-height:58px;display:flex;flex-direction:column;align-items:center;gap:4px;font:600 12px Overpass,system-ui,sans-serif;color:var(--on-noche-mut,#aab3cf);cursor:pointer;transition:color 140ms cubic-bezier(.16,1,.3,1)}.ds-tab svg{width:24px;height:24px}.ds-tab::before{content:'';position:absolute;top:0;left:28%;right:28%;height:4px;border-radius:0 0 3px 3px;background:var(--linea,#2f6fe4);transform:scaleX(0);transition:transform 260ms cubic-bezier(.16,1,.3,1)}.ds-tab:hover{color:var(--on-noche,#f4f1ea)}.ds-tab:focus-visible{outline:3px solid var(--ring,#2f6fe4);outline-offset:-3px}.ds-tab.ds-on{color:var(--on-noche,#f4f1ea);font-weight:800}.ds-tab.ds-on::before{transform:scaleX(1)}"
+    },
+    {
+      "name": "Diagrama de línea",
+      "kind": "custom",
+      "refersTo": "lineaNivel",
+      "description": "Firma: niveles como estaciones en un riel de 6px; el tren marca el avance. Solo en Inicio, Rutina y Progreso.",
+      "html": "<div class=\"ds-linea\" role=\"img\" aria-label=\"Estación Principiante, 64% del tramo hacia Intermedio\"><div class=\"ds-riel\"><b style=\"width:32%\"></b><i class=\"ds-est ds-aqui\" style=\"left:0%\"><span>Principiante</span></i><i class=\"ds-est\" style=\"left:50%\"><span>Intermedio</span></i><i class=\"ds-est\" style=\"left:100%\"><span>Avanzado</span></i><em class=\"ds-tren\" style=\"left:32%\">64%</em></div></div>",
+      "css": ".ds-linea{background:var(--noche,#0e1a3a);color:var(--on-noche,#f4f1ea);padding:4px 28px 52px;font-family:Overpass,system-ui,sans-serif}.ds-riel{position:relative;height:6px;margin:30px 0 0;background:var(--noche-3,#26345f);border-radius:3px}.ds-riel b{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--linea,#2f6fe4);transform-origin:left;animation:dsRiel 900ms cubic-bezier(.16,1,.3,1) both}@keyframes dsRiel{from{transform:scaleX(0)}}.ds-est{font-style:normal;position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--porcelana,#f4f1ea);border:5px solid var(--noche-3,#26345f);box-sizing:border-box}.ds-est span{position:absolute;top:22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:700;color:var(--on-noche-mut,#aab3cf)}.ds-est:last-of-type span{left:auto;right:0;transform:none}.ds-aqui{width:30px;height:30px;margin:-15px 0 0 -15px;border-width:7px;border-color:var(--linea,#2f6fe4);box-shadow:0 0 0 4px var(--noche,#0e1a3a)}.ds-aqui span{top:28px;left:-4px;transform:none;color:var(--on-noche,#f4f1ea);font-weight:800}.ds-tren{position:absolute;top:-30px;transform:translateX(-50%);background:var(--porcelana,#f4f1ea);color:var(--noche,#0e1a3a);font:800 12px/1 Overpass,system-ui,sans-serif;font-style:normal;padding:5px 7px;border-radius:4px}.ds-tren::after{content:'';position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:var(--porcelana,#f4f1ea)}@media (prefers-reduced-motion:reduce){.ds-riel b{animation:none}}"
+    },
+    {
+      "name": "Placa de servicio",
+      "kind": "card",
+      "refersTo": "placa",
+      "description": "Porcelana en ambos modos: luz del semáforo con puntaje, estado en palabras, servicio y motivo. Nunca solo color.",
+      "html": "<section class=\"ds-placa\" aria-label=\"Estado de tu semana\"><div class=\"ds-light ds-amarillo\" role=\"img\" aria-label=\"Puntaje 65 de 100\"><b>65</b><span>de 100</span></div><div class=\"ds-estado\">Estancado</div><div class=\"ds-serv\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M5 9h14M5 15h14\"/></svg>Servicio con demoras · semana del 2 nov</div><div class=\"ds-motivo\"><b>La proteína quedó bajo la meta la mayoría de los días</b></div></section>",
+      "css": ".ds-placa{background:var(--placa,#f4f1ea);color:var(--noche,#0e1a3a);border:1.5px solid #d9d3c4;border-radius:10px;padding:16px;box-shadow:0 10px 28px rgba(14,26,58,.22);display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center;font-family:Overpass,system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-light{grid-row:1/3;width:92px;height:92px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center}.ds-light b{font:900 48px/.9 Overpass,system-ui,sans-serif}.ds-light span{font-size:12px;font-weight:700;opacity:.85}.ds-amarillo{background:var(--amarillo,#f2b200);color:var(--on-amarillo,#0e1a3a)}.ds-estado{font:900 26px/1.05 Overpass,system-ui,sans-serif;letter-spacing:-.01em}.ds-serv{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}.ds-motivo{grid-column:1/3;margin-top:10px;padding-top:10px;border-top:1.5px solid #d9d3c4;font-size:15px}"
+    },
+    {
+      "name": "Semana L–D",
+      "kind": "custom",
+      "refersTo": "semana",
+      "description": "Siete estaciones en un riel: llena = entrenaste, borde de la línea = hoy.",
+      "html": "<div class=\"ds-semana\" role=\"list\" aria-label=\"Sesiones de la semana\"><div class=\"ds-dia ds-ok\" role=\"listitem\"><i></i>L</div><div class=\"ds-dia\" role=\"listitem\"><i></i>M</div><div class=\"ds-dia ds-ok\" role=\"listitem\"><i></i>X</div><div class=\"ds-dia ds-hoy\" role=\"listitem\"><i></i>J</div><div class=\"ds-dia\" role=\"listitem\"><i></i>V</div><div class=\"ds-dia\" role=\"listitem\"><i></i>S</div><div class=\"ds-dia\" role=\"listitem\"><i></i>D</div></div>",
+      "css": ".ds-semana{display:flex;justify-content:space-between;position:relative;margin-top:20px;font-family:Overpass,system-ui,sans-serif}.ds-semana::before{content:'';position:absolute;top:12px;left:12px;right:12px;height:6px;border-radius:3px;background:var(--line,#d5d0c3)}.ds-dia{position:relative;width:30px;text-align:center;font-size:12px;font-weight:700;color:var(--mut,#4a5578)}.ds-dia i{display:block;box-sizing:border-box;width:30px;height:30px;margin:0 auto 4px;border-radius:50%;background:var(--ground,#f4f1ea);border:5px solid var(--line,#d5d0c3)}.ds-ok i{background:var(--linea,#2f6fe4);border-color:var(--linea,#2f6fe4)}.ds-hoy{color:var(--tx,#0e1a3a);font-weight:900}.ds-hoy i{border-color:var(--linea,#2f6fe4)}.ds-hoy::after{content:'hoy';position:absolute;left:50%;top:-18px;transform:translateX(-50%);font-size:11px;font-weight:800;color:var(--linea,#2f6fe4)}"
+    },
+    {
+      "name": "Letrero de próxima estación",
+      "kind": "custom",
+      "refersTo": "letrero",
+      "description": "Señal de andén azul noche con la decisión de nivel y su razón.",
+      "html": "<div class=\"ds-letrero\"><h2>Próxima estación: Intermedio</h2><p><b>Mantén Principiante.</b> Para subir necesitas 85% de adherencia en 3 semanas (llevas 67%).</p></div>",
+      "css": ".ds-letrero{background:var(--noche,#0e1a3a);color:var(--on-noche,#f4f1ea);border-radius:10px;padding:14px 16px;font-family:Overpass,system-ui,sans-serif}.ds-letrero h2{margin:6px 0 0;font:800 22px/1.1 Overpass,system-ui,sans-serif;letter-spacing:-.01em}.ds-letrero h2::before{content:'';display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--porcelana,#f4f1ea);border:5px solid var(--linea,#2f6fe4);margin-right:10px;vertical-align:-1px}.ds-letrero p{margin:8px 0 0}"
+    },
+    {
+      "name": "Parada de la ruta",
+      "kind": "custom",
+      "refersTo": "picto",
+      "description": "Ejercicio en la ruta vertical: pictograma blanco en placa de la línea, número en pastilla azul noche.",
+      "html": "<div class=\"ds-ruta\"><div class=\"ds-ex\"><span class=\"ds-picto\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"8.5\" cy=\"4.6\" r=\"2\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M9 7.4 10.8 13H16.2L15.2 20M9.6 9.2H15.4M3 21h18\"/></svg></span><span class=\"ds-num\">1</span><h3>Sentadilla goblet</h3><div class=\"ds-meta\">Piernas · 3 × 8–12</div></div></div>",
+      "css": ".ds-ruta{position:relative;font-family:Overpass,system-ui,sans-serif}.ds-ruta::before{content:'';position:absolute;top:22px;bottom:22px;left:21px;width:6px;border-radius:3px;background:var(--line,#d5d0c3)}.ds-ex{position:relative;padding:14px 0 16px 62px}.ds-picto{position:absolute;left:0;top:12px;width:48px;height:48px;border-radius:10px;background:var(--linea,#2f6fe4);color:var(--on-linea,#fff);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--ground,#f4f1ea)}.ds-picto svg{width:34px;height:34px}.ds-num{position:absolute;left:34px;top:4px;min-width:22px;height:22px;border-radius:11px;background:var(--noche,#0e1a3a);color:var(--on-noche,#f4f1ea);font:800 12px/22px Overpass,system-ui,sans-serif;text-align:center;padding:0 5px;box-sizing:border-box;box-shadow:0 0 0 3px var(--ground,#f4f1ea)}.ds-ex h3{margin:0;font:700 18px/1.1 Overpass,system-ui,sans-serif}.ds-meta{font-size:14px;color:var(--mut,#4a5578);margin-top:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Mapa de Metro",
+    "overview": "El progreso es un viaje en Metro. Los niveles (Principiante, Intermedio, Avanzado) son estaciones, la semana es un tramo y el semáforo de evolución es el estado del servicio: normal, con demoras o interrumpido. El sistema toma su vocabulario del plano y la señalética del Metro de Santiago: esmalte azul noche como suelo y barra, una placa de porcelana para el aviso de servicio, rieles de 6 px con estaciones circulares de borde grueso y una sola línea de color que identifica el objetivo de la persona. Rechaza a propósito el tablero oscuro de anillos y tarjetas de las apps de fitness, y también el tono de gimnasio rudo o de ficha clínica.\n\nLa densidad es de pantalla de teléfono usada con prisa y con una mano: una columna de 560 px como máximo, secciones separadas por filetes en vez de tarjetas apiladas, números grandes y tabulares, objetivos táctiles de 44 a 48 px. El shell (barra superior, diagrama de línea y navegación inferior) es siempre azul noche; el suelo cambia con el sistema: porcelana en modo claro, azul noche en modo oscuro. La placa de servicio se queda de porcelana en ambos modos: es el letrero fijo de la estación.\n\nEl color de estado (verde, ámbar, rojo) pertenece solo al servicio. Todo lo demás se dibuja con la línea del objetivo y con tinta neutra. El movimiento es corto y con freno suave, como un tren que llega al andén, y desaparece por completo cuando el sistema pide movimiento reducido.",
+    "keyCharacteristics": [
+      "Shell azul noche de borde a borde, también en escritorio, aunque la columna mida 560 px.",
+      "Una línea de color por objetivo: Fuerza cobalto, Bajar grasa café, Movilidad turquesa.",
+      "Verde, ámbar y rojo reservados al estado del servicio, siempre con puntaje, palabras y motivo.",
+      "Overpass en pesos 800–900 para títulos y cifras, con números tabulares en toda la app.",
+      "Rieles de 6 px y estaciones circulares con borde grueso como gramática gráfica recurrente.",
+      "Plano, con sombra solo en la placa de servicio, el toast y las tarjetas del modo claro."
+    ],
+    "rules": [
+      {
+        "name": "The Service Color Rule",
+        "body": "Verde, ámbar y rojo significan el estado del servicio y nada más. No se usan para decorar, para identificar ramales ni para pintar series de datos.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Line Rule",
+        "body": "Hay una sola línea de color en pantalla: la del objetivo de la persona. Los ramales, las macros y la cintura se dibujan con tinta neutra (`--tx`); los pesajes sueltos con tinta tenue; la línea del objetivo queda para el avance, el promedio y el volumen.",
+        "section": "colors"
+      },
+      {
+        "name": "The Porcelain Plaque Rule",
+        "body": "La placa de servicio es porcelana con texto azul noche en modo claro y en modo oscuro. Es lo único que no se invierte.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Numbers Rule",
+        "body": "`font-variant-numeric: tabular-nums` se aplica en `body` y lo hereda toda la app: puntajes, series, kilos y calorías se alinean como un horario.",
+        "section": "typography"
+      },
+      {
+        "name": "The SepFix Rule",
+        "body": "El punto medio \"·\" de Overpass queda pegado al texto siguiente, así que cada pila de fuentes empieza con \"SepFix\", una `@font-face` local (Segoe UI, Arial, Helvetica Neue o Roboto) limitada a U+00B7. El punto medio es el separador de la casa (\"Entrenamiento · 40%\", \"· actual\"); no se reemplaza por guiones ni barras.",
+        "section": "typography"
+      },
+      {
+        "name": "The Single Floating Plaque Rule",
+        "body": "Solo la placa de servicio se levanta sobre el resto. Comida y Progreso se componen con secciones y filetes; no apilan tarjetas con sombra suave.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Three Places Rule",
+        "body": "El diagrama de línea aparece solo en Inicio (avance de nivel), Rutina (sobre la ruta de hoy) y Progreso (el historial de semanas como línea vertical), además del ingreso como ilustración del producto. Comida y Perfil usan controles estándar dentro del mismo sistema, sin rieles de firma.",
+        "section": "components"
+      },
+      {
+        "name": "The Never By Color Alone Rule",
+        "body": "El semáforo siempre lleva cuatro señales: el color, el puntaje numérico, el estado en palabras y el motivo, más un ícono de tendencia. En el historial, la estación de color va acompañada del estado escrito y el puntaje.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do leer siempre la línea desde `--linea` / `--on-linea` / `--ring` y dejar que `:root[data-obj]` y el tema la cambien; nunca escribir el cobalto, el café o el turquesa dentro de un componente.",
+      "Do mantener el shell en azul noche en ambos modos y la placa de servicio en porcelana en ambos modos.",
+      "Do dibujar rieles de 6px con estaciones circulares de borde grueso (5–7px) cuando algo es un recorrido: niveles, semana, ruta, historial.",
+      "Do acompañar cada color de servicio con puntaje, estado en palabras, motivo e ícono de tendencia.",
+      "Do dibujar series y subpuntajes en tinta neutra (`--tx`), los datos crudos en tinta tenue y solo la tendencia principal en la línea.",
+      "Do usar Overpass 800–900 con números tabulares para cifras, y el punto medio \"·\" (vía SepFix) como separador.",
+      "Do usar las duraciones de la casa: 140ms para estados, 260ms para entradas y la pestaña activa, `cubic-bezier(.16,1,.3,1)` como curva, escala 0.97 al presionar.",
+      "Do respetar `prefers-reduced-motion`: animaciones y transiciones a 0.01ms; solo el indicador de carga sigue girando, más lento (1.6s).",
+      "Do mantener objetivos táctiles de 44px como mínimo y 48px en botones y campos principales."
+    ],
+    "donts": [
+      "Don't usar verde, ámbar o rojo para algo que no sea el estado del servicio (ramales, decoración, categorías, series).",
+      "Don't mostrar el semáforo solo por color.",
+      "Don't poner el diagrama de línea fuera de Inicio, Rutina y Progreso (y la ilustración del ingreso).",
+      "Don't apilar tarjetas con sombra suave en Comida ni en Progreso; se componen con secciones y filetes.",
+      "Don't poner un antetítulo (eyebrow o kicker) sobre los títulos.",
+      "Don't usar franjas laterales de acento (bordes izquierdos de color) en alertas, toasts o tarjetas.",
+      "Don't introducir una segunda línea de color en la misma pantalla ni volver al tablero oscuro de anillos y tarjetas de las apps de fitness.",
+      "Don't reemplazar los pictogramas propios por íconos de librería o fotos de ejercicios."
+    ]
+  }
+}

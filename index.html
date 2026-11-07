@@ -52,13 +52,21 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:none}
 label{display:block;font-size:14px;font-weight:500;color:var(--mut);margin:14px 0 6px}
 h1,h2,h3{margin:0;line-height:1.1;font-family:var(--f-head);font-weight:700;letter-spacing:.005em}
 h1{font-size:26px} h2{font-size:24px} h3{font-size:19px;font-weight:600}
-.eyebrow{font-family:var(--f-head);font-size:13px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+.wordmark{font-family:var(--f-head);font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+/* superficies del navegador con la paleta */
+:root{color-scheme:light;accent-color:var(--pri);caret-color:var(--pri);scrollbar-color:color-mix(in srgb,var(--mut) 45%,transparent) transparent}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark}}
+:root[data-theme="dark"]{color-scheme:dark}
+::selection{background:color-mix(in srgb,var(--pri) 30%,transparent);color:var(--tx)}
+[aria-busy="true"]{cursor:progress}
+.btn[aria-busy="true"]::before{content:"";width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .8s linear infinite}
 .ico{width:20px;height:20px;flex-shrink:0;vertical-align:-4px}
 .app{max-width:560px;margin:0 auto;min-height:100dvh;padding:0 16px calc(96px + env(safe-area-inset-bottom))}
 header.top{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) 0 6px}
 header.top .logo{width:34px;height:34px}
 header.top h1{font-size:26px;letter-spacing:.02em;text-transform:uppercase}
-header.top .sub{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:13px;color:var(--mut)}
+header.top .sub{margin-left:auto;min-width:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:13px;color:var(--mut)}
+header.top .sub>span:last-child{max-width:48vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--pri) 14%,var(--card));color:var(--tx);font-family:var(--f-head);font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;margin:14px 0;box-shadow:var(--sh)}
 .muted{color:var(--mut)}
@@ -213,7 +221,8 @@ const IC = {
   plato: svg('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/>'),
   sube: svg('<path d="m3 17 6-6 4 4 8-8M15 7h6v6"/>'),
   baja: svg('<path d="m3 7 6 6 4-4 8 8M15 17h6v-6"/>'),
-  igual: svg('<path d="M5 9h14M5 15h14"/>')
+  igual: svg('<path d="M5 9h14M5 15h14"/>'),
+  mas: svg('<path d="M12 5v14M5 12h14"/>')
 };
 const NIVELES = ['principiante', 'intermedio', 'avanzado'];
 const NIVEL_TX = { principiante: 'Principiante', intermedio: 'Intermedio', avanzado: 'Avanzado' };
@@ -240,8 +249,16 @@ const fCorta = s => deIso(s).toLocaleDateString('es-CL', { day: 'numeric', month
 const fLarga = s => deIso(s).toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long' });
 
 function toast(msg, ms = 2600) {
-  const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
-  document.body.appendChild(t); setTimeout(() => t.remove(), ms);
+  document.querySelectorAll('.toast').forEach(x => x.remove());
+  const t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); t.setAttribute('aria-live', 'polite'); t.textContent = msg;
+  document.body.appendChild(t); setTimeout(() => t.remove(), Math.max(ms, msg.length * 60));
+}
+// Bloquea el botón mientras una acción guarda, para evitar envíos duplicados.
+async function ocupado(btn, fn) {
+  if (!btn || btn.getAttribute('aria-busy') === 'true') return;
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+  try { return await fn(); }
+  finally { if (btn.isConnected) { btn.disabled = false; btn.removeAttribute('aria-busy'); } }
 }
 function errMsg(e) {
   const m = e?.message || String(e);
@@ -260,7 +277,7 @@ $('#dlg-x').onclick = cerrar;
 function vLogin(msg) {
   $('#root').innerHTML = `
   <div class="login">
-    <div class="row">${LOGO}<span class="eyebrow" style="font-size:16px;color:var(--tx)">Evolva</span></div>
+    <div class="row">${LOGO}<span class="wordmark">Evolva</span></div>
     <h1>Entrena por niveles. <em>Mide si evolucionas.</em></h1>
     <p class="muted" style="margin:0">Entrenamiento y alimentación en un solo lugar, con un semáforo semanal que te dice si avanzas.</p>
     <div class="feats">
@@ -274,7 +291,7 @@ function vLogin(msg) {
         <input id="email" type="email" autocomplete="email" required placeholder="tu@correo.cl">
         <button class="btn full" style="margin-top:14px" id="b-login">Enviarme un enlace para entrar</button>
       </form>
-      <p class="small muted" id="login-msg" style="margin:12px 0 0">${esc(msg || 'Te enviaremos un enlace al correo. Usa la misma cuenta de Apps One si ya tienes una.')}</p>
+      <p class="small muted" id="login-msg" role="status" aria-live="polite" style="margin:12px 0 0">${esc(msg || 'Te enviaremos un enlace al correo. Usa la misma cuenta de Apps One si ya tienes una.')}</p>
     </div>
     <p class="aviso">Evolva no reemplaza a un profesional de la salud. Ante dolor, lesiones o metas extremas, consulta a un médico o nutricionista.</p>
   </div>`;
@@ -324,9 +341,9 @@ function formPerfil(p = {}) {
     <input id="p-nombre" value="${esc(p.nombre || '')}" autocomplete="given-name">
     <label>Objetivo principal</label>
     <div class="chips" id="p-obj">${Object.entries(OBJ_TX).map(([k, t]) => `<button type="button" class="chip ${(p.objetivo || 'fuerza') === k ? 'on' : ''}" data-v="${k}">${t}</button>`).join('')}</div>
-    <label>Nivel inicial</label>
+    <label>${p.id ? 'Nivel actual' : 'Nivel inicial'}</label>
     <div class="chips" id="p-niv">${NIVELES.map(k => `<button type="button" class="chip ${(p.nivel || 'principiante') === k ? 'on' : ''}" data-v="${k}">${NIVEL_TX[k]}</button>`).join('')}</div>
-    <p class="small muted" style="margin:6px 0 0">Si llevas menos de 3 meses entrenando de forma regular, parte en Principiante. La app te dirá cuándo subir.</p>
+    <p class="small muted" style="margin:6px 0 0">${p.id ? 'Cambiarlo a mano queda registrado. Lo recomendado es seguir la sugerencia de Inicio.' : 'Si llevas menos de 3 meses entrenando de forma regular, parte en Principiante. La app te dirá cuándo subir.'}</p>
     <div class="grid2">
       <div><label for="p-sexo">Sexo</label><select id="p-sexo">${o('', 'Prefiero no decir', p.sexo || '')}${o('mujer', 'Mujer', p.sexo)}${o('hombre', 'Hombre', p.sexo)}</select></div>
       <div><label for="p-nac">Fecha de nacimiento</label><input id="p-nac" type="date" value="${p.fecha_nacimiento || ''}" max="${hoy()}"></div>
@@ -353,10 +370,14 @@ function leerPerfil() {
   };
 }
 function chipsUnicos(sel) {
-  document.querySelectorAll(sel).forEach(g => g.addEventListener('click', e => {
-    const b = e.target.closest('.chip'); if (!b) return;
-    g.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === b));
-  }));
+  document.querySelectorAll(sel).forEach(g => {
+    g.setAttribute('role', 'group');
+    g.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.classList.contains('on')));
+    g.addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      g.querySelectorAll('.chip').forEach(c => { c.classList.toggle('on', c === b); c.setAttribute('aria-pressed', c === b); });
+    });
+  });
 }
 
 function vOnboarding() {
@@ -424,7 +445,8 @@ function ir(tab) {
   $('#view').innerHTML = `<div class="empty"><span class="spin"></span></div>`;
   window.scrollTo(0, 0);
   ({ inicio: vInicio, rutina: vRutina, comida: vComida, progreso: vProgreso, perfil: vPerfil })[tab]().catch(e => {
-    $('#view').innerHTML = `<div class="card"><div class="alert bad">${esc(errMsg(e))}</div></div>`;
+    $('#view').innerHTML = `<div class="card"><div class="alert bad" role="alert"><b>No se pudo cargar esta sección.</b><div class="small" style="margin-top:4px">${esc(errMsg(e))}</div></div><button class="btn sec" id="reintentar" style="margin-top:12px">Reintentar</button></div>`;
+    $('#reintentar').onclick = () => ir(tab);
   });
 }
 
@@ -488,7 +510,7 @@ async function vInicio() {
 
   $('#view').innerHTML = `
     <div class="card hero-score" style="--sem:var(--${e.color})">
-      <div class="row between"><span class="eyebrow">Semana del ${fCorta(semana)}</span><span class="eyebrow">Semáforo</span></div>
+      <div class="row between" style="align-items:baseline"><h2>Tu semana</h2><span class="small muted">desde el ${fCorta(semana)}</span></div>
       <div class="score" style="margin-top:12px">
         <div class="light ${e.color}" role="img" aria-label="Puntaje ${e.puntaje} de 100, ${COLOR_TX[e.color]}"><b>${e.puntaje}</b><span>de 100</span></div>
         <div>
@@ -588,9 +610,9 @@ async function vRutina(nivelVer, diaVer) {
     <div class="card">
       <h2>Rutina de ${OBJ_TX[S.perfil.objetivo].toLowerCase()}</h2>
       <label>Nivel</label>
-      <div class="chips" id="r-niv">${NIVELES.map(k => `<button class="chip ${k === nivel ? 'on' : ''} ${k === S.perfil.nivel ? 'actual' : ''}" data-v="${k}">${NIVEL_TX[k]}</button>`).join('')}</div>
+      <div class="chips" id="r-niv" role="group" aria-label="Nivel">${NIVELES.map(k => `<button class="chip ${k === nivel ? 'on' : ''} ${k === S.perfil.nivel ? 'actual' : ''}" aria-pressed="${k === nivel}" data-v="${k}">${NIVEL_TX[k]}</button>`).join('')}</div>
       <label>Día</label>
-      <div class="chips" id="r-dia">${['A', 'B'].map(k => `<button class="chip ${k === dia ? 'on' : ''}" data-v="${k}">Día ${k}</button>`).join('')}</div>
+      <div class="chips" id="r-dia" role="group" aria-label="Día">${['A', 'B'].map(k => `<button class="chip ${k === dia ? 'on' : ''}" aria-pressed="${k === dia}" data-v="${k}">Día ${k}</button>`).join('')}</div>
       ${viendoOtro ? `<div class="alert warn" style="margin-top:12px">Estás viendo ${NIVEL_TX[nivel]}. Tu nivel actual es ${NIVEL_TX[S.perfil.nivel]}.<br><button class="btn sec" id="r-cambiar" style="margin-top:8px">Cambiar mi nivel a ${NIVEL_TX[nivel]}</button></div>` : ''}
       ${ev && !viendoOtro ? `<div style="margin-top:12px"><div class="row between small"><span>${ev.decision === 'subir' ? '¡Listo para subir de nivel!' : 'Avance al siguiente nivel'}</span><b>${ev.progreso_nivel}%</b></div><div class="bar" style="margin-top:6px"><i style="--p:${ev.progreso_nivel}"></i></div></div>` : ''}
       ${cola.length ? `<div class="alert warn small" style="margin-top:12px">${cola.length} ${cola.length === 1 ? 'sesión pendiente' : 'sesiones pendientes'} de sincronizar.</div>` : ''}
@@ -719,7 +741,8 @@ async function vComida() {
       ${COMIDAS.map(c => {
         const it = (regs || []).filter(r => r.comida === c);
         const k = it.reduce((s, r) => s + +r.kcal, 0);
-        return `<div class="meal"><div class="row between"><h3>${COMIDA_TX[c]} <span class="small muted" style="font-weight:400">${it.length ? r0(k) + ' kcal' : ''}</span></h3><button class="btn sec" data-add="${c}" style="min-height:36px;padding:6px 12px">+ Agregar</button></div>
+        return `<div class="meal"><div class="row between"><h3>${COMIDA_TX[c]} <span class="small muted" style="font-weight:400">${it.length ? r0(k) + ' kcal' : ''}</span></h3><button class="btn sec" data-add="${c}" aria-label="Agregar a ${COMIDA_TX[c].toLowerCase()}" style="min-height:44px;padding:8px 14px">${IC.mas}Agregar</button></div>
+          ${it.length ? '' : `<p class="small muted" style="margin:6px 0 0">Sin registros.</p>`}
           ${it.map(r => `<div class="item"><div>${esc(r.nombre)} <span class="muted small">${r1(r.gramos)} g</span><div class="small muted">${r0(r.kcal)} kcal · P ${r1(r.proteina)} · C ${r1(r.carbos)} · G ${r1(r.grasas)}</div></div><button class="x" data-del="${r.id}" aria-label="Eliminar ${esc(r.nombre)}">${IC.x}</button></div>`).join('')}</div>`;
       }).join('')}
     </div>
@@ -730,7 +753,7 @@ async function vComida() {
   $('#c-meals').onclick = async e => {
     const a = e.target.closest('[data-add]'), d = e.target.closest('[data-del]');
     if (a) dlgAlimento(f, a.dataset.add);
-    if (d) { const { error: er } = await sb.from('registros_alimento').delete().eq('id', d.dataset.del); if (er) return toast(errMsg(er)); ir('comida'); }
+    if (d) ocupado(d, async () => { const { error: er } = await sb.from('registros_alimento').delete().eq('id', d.dataset.del); if (er) return toast(errMsg(er)); toast('Registro eliminado'); ir('comida'); });
   };
 }
 
@@ -786,7 +809,7 @@ function dlgAlimento(fecha, comida) {
       pintar(lista, 'off');
     } catch { $('#a-res', b).innerHTML = '<p class="small muted">No se pudo consultar Open Food Facts.</p>'; }
   };
-  $('#a-ok', b).onclick = async () => {
+  $('#a-ok', b).onclick = ev => ocupado(ev.currentTarget, async () => {
     const g = num($('#a-g', b).value); if (!sel || !g || g <= 0) return toast('Indica los gramos.');
     let alimento_id = sel.id || null;
     if (!sel.id) { // guardar el producto de Open Food Facts como alimento propio para reusarlo
@@ -797,14 +820,14 @@ function dlgAlimento(fecha, comida) {
     const { error } = await sb.from('registros_alimento').insert({ fecha, comida, alimento_id, nombre: sel.nombre, gramos: g, kcal: r1(sel.kcal * f), proteina: r1(sel.proteina * f), carbos: r1(sel.carbos * f), grasas: r1(sel.grasas * f) });
     if (error) return toast(errMsg(error));
     cerrar(); ir('comida');
-  };
-  $('#n-ok', b).onclick = async () => {
+  });
+  $('#n-ok', b).onclick = ev => ocupado(ev.currentTarget, async () => {
     const a = { usuario_id: S.user.id, nombre: $('#n-nom', b).value.trim(), kcal: num($('#n-k', b).value), proteina: num($('#n-p', b).value) || 0, carbos: num($('#n-c', b).value) || 0, grasas: num($('#n-gr', b).value) || 0, fuente: 'propio' };
     if (!a.nombre || a.kcal == null) return toast('Nombre y calorías son obligatorios.');
     const { data, error } = await sb.from('alimentos').insert(a).select().single();
     if (error) return toast(errMsg(error));
     S.alimentos.push(data); b.querySelector('details').open = false; $('#a-q', b).value = data.nombre; buscar(); elegir(data);
-  };
+  });
 }
 
 // ---------- PROGRESO ----------
@@ -852,8 +875,7 @@ async function vProgreso() {
       ${(evs.data || []).length ? (evs.data || []).map(e => `<div class="hist"><span class="d" style="background:var(--${e.color})"></span><div style="flex:1"><div class="row between"><b>Semana del ${fCorta(e.semana)}</b><b>${e.puntaje}</b></div><div class="small muted">Entreno ${e.puntaje_entreno} · Nutrición ${e.puntaje_nutricion} · Cuerpo ${e.puntaje_cuerpo} · ${NIVEL_TX[e.nivel]}</div>${(e.motivos || []).length ? `<div class="small" style="margin-top:2px">${esc(e.motivos[0])}</div>` : ''}</div></div>`).join('') : '<p class="empty small">Tu primera evaluación aparecerá al terminar la semana.</p>'}
     </div>`;
 
-  $('#m-f').onsubmit = async e => {
-    e.preventDefault();
+  $('#m-f').onsubmit = e => { e.preventDefault(); ocupado(e.target.querySelector('button'), async () => {
     const r = { fecha: $('#m-fe').value || hoy(), peso: num($('#m-p').value), cintura_cm: num($('#m-c').value), grasa_pct: num($('#m-g').value) };
     if (r.peso == null && r.cintura_cm == null && r.grasa_pct == null) return toast('Ingresa al menos un valor.');
     Object.keys(r).forEach(k => r[k] == null && delete r[k]);
@@ -861,7 +883,7 @@ async function vProgreso() {
     if (error) return toast(errMsg(error));
     if (r.peso) await sb.rpc('calcular_mi_meta').then(({ data }) => { if (data) S.meta = data; });
     toast('Medición guardada'); ir('progreso');
-  };
+  }); };
   const pintarEj = () => {
     const id = Number($('#p-ej').value), e = ejercicio(id);
     const porDia = {};
@@ -895,8 +917,7 @@ async function vPerfil() {
     <div class="card row between"><span class="small muted">${esc(S.user.email)}</span><button class="btn ghost" id="pf-out">Cerrar sesión</button></div>
     <p class="aviso">Evolva no reemplaza a un profesional de la salud. Ante dolor, lesiones o metas extremas, consulta a un médico o nutricionista.</p>`;
   chipsUnicos('#p-obj, #p-niv');
-  $('#pf').onsubmit = async e => {
-    e.preventDefault();
+  $('#pf').onsubmit = e => { e.preventDefault(); ocupado(e.target.querySelector('button.full'), async () => {
     const p = leerPerfil(); const nivelNuevo = p.nivel; delete p.nivel;
     const { data, error } = await sb.from('perfiles').update(p).eq('id', S.user.id).select().single();
     if (error) return toast(errMsg(error));
@@ -904,10 +925,10 @@ async function vPerfil() {
     if (nivelNuevo !== S.perfil.nivel) { const r = await sb.rpc('cambiar_mi_nivel', { p_nivel: nivelNuevo, p_motivo: 'Cambio manual desde Perfil' }); if (r.data) S.perfil = r.data; }
     const mm = await sb.rpc('calcular_mi_meta'); if (mm.data) S.meta = mm.data;
     refrescarHeader(); toast('Perfil actualizado'); ir('perfil');
-  };
-  $('#pf-meta').onclick = async () => { const { data, error } = await sb.rpc('calcular_mi_meta'); if (error) return toast(errMsg(error)); S.meta = data; toast('Metas recalculadas'); ir('perfil'); };
+  }); };
+  $('#pf-meta').onclick = ev => ocupado(ev.currentTarget, async () => { const { data, error } = await sb.rpc('calcular_mi_meta'); if (error) return toast(errMsg(error)); S.meta = data; toast('Metas recalculadas'); ir('perfil'); });
   $('#pf-out').onclick = salir;
-  $('#pf-exp').onclick = async () => {
+  $('#pf-exp').onclick = ev => ocupado(ev.currentTarget, async () => {
     const tablas = ['perfiles', 'sesiones', 'series', 'mediciones', 'registros_alimento', 'metas_nutricionales', 'evaluaciones_semanales', 'cambios_nivel'];
     const out = { exportado: new Date().toISOString() };
     for (const t of tablas) { const { data } = await sb.from(t).select('*'); out[t] = data || []; }
@@ -915,15 +936,15 @@ async function vPerfil() {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' }));
     a.download = `evolva-${hoy()}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-  };
-  $('#pf-del').onclick = async () => {
+  });
+  $('#pf-del').onclick = ev => ocupado(ev.currentTarget, async () => {
     if (!confirm('Se eliminarán todos tus datos de Evolva: perfil, entrenamientos, comidas, mediciones y evaluaciones. No se puede deshacer. ¿Continuar?')) return;
     if (prompt('Escribe ELIMINAR para confirmar') !== 'ELIMINAR') return toast('No se eliminó nada.');
     const { error } = await sb.rpc('eliminar_mis_datos');
     if (error) return toast(errMsg(error));
     localStorage.removeItem(COLA); localStorage.removeItem(BORRADOR);
     toast('Tus datos fueron eliminados.'); S.perfil = null; vOnboarding();
-  };
+  });
 }
 
 // ---------- arranque ----------

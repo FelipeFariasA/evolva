@@ -2,7 +2,7 @@
 
 App móvil (web instalable) que acompaña entrenamiento y alimentación en un solo lugar y dice, con evidencia, si la persona está evolucionando. Su diferenciador es el **semáforo de evolución** semanal, que cruza entrenamiento, nutrición y medidas corporales.
 
-**Producción:** Vercel, proyecto `evolva` (publica automáticamente cada cambio en `main`).
+**Producción:** <https://evolva-phi.vercel.app> (Vercel, proyecto `evolva`; publica automáticamente cada cambio en `main`).
 
 ## Pantallas
 
@@ -57,9 +57,11 @@ Migraciones en [`supabase/migrations`](supabase/migrations):
 
 ## Puesta en marcha
 
-1. Aplicar las migraciones en el proyecto `apps-one`.
-2. Supabase → **Settings → Data API → Exposed schemas**: agregar `evolva`.
-3. Supabase → **Authentication → URL Configuration → Redirect URLs**: agregar la URL de Vercel de Evolva (`https://<dominio>/**`).
+Ya hecho el 07-11-2026:
+
+1. Migraciones aplicadas en el proyecto `apps-one` (incluye `pg_cron` con el job `evolva-evaluacion-semanal`, lunes 10:00 UTC).
+2. Schema `evolva` agregado en **Data API → Exposed schemas**.
+3. `https://evolva-phi.vercel.app/**` agregada en **Authentication → URL Configuration → Redirect URLs**.
 4. Vercel: proyecto `evolva` conectado a este repositorio, sin build (sitio estático).
 
 ## Próximas fases

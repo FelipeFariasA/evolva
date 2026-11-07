@@ -416,19 +416,19 @@ begin
   s_ent := adh * 100 * 0.6 + s_prog * 0.4;
 
   if n_ses = 0 then
-    mot := mot || 'No registraste entrenamientos esta semana';
+    mot := array_append(mot, 'No registraste entrenamientos esta semana');
   elsif adh < (r->>'bajar_adherencia')::numeric then
-    mot := mot || format('Hiciste %s de %s sesiones esta semana', n_ses, ses_sem::int);
+    mot := array_append(mot, format('Hiciste %s de %s sesiones esta semana', n_ses, ses_sem::int));
   end if;
   if vol_ant > 0 and vol_act > 0 and vol_act < vol_ant * 0.95 then
-    mot := mot || 'Las cargas o repeticiones bajaron frente a la semana anterior';
+    mot := array_append(mot, 'Las cargas o repeticiones bajaron frente a la semana anterior');
   end if;
 
   -- ===== Nutrición (días dentro de la meta calórica y de proteína)
   den := greatest(least(7, current_date - ini + 1), 1);
   if meta.usuario_id is null then
     s_nut := 0;
-    mot := mot || 'Aún no tienes meta nutricional';
+    mot := array_append(mot, 'Aún no tienes meta nutricional');
   else
     select count(*),
            count(*) filter (where abs(d.kcal - meta.kcal) <= meta.kcal * (r->>'tolerancia_kcal')::numeric),
@@ -440,7 +440,7 @@ begin
              group by fecha) d;
     s_nut := 50.0 * dias_kcal / den + 50.0 * dias_prot / den;
     if dias_reg = 0 then
-      mot := mot || 'No registraste comidas esta semana';
+      mot := array_append(mot, 'No registraste comidas esta semana');
     end if;
 
     -- proteína bajo la meta varias semanas seguidas
@@ -456,9 +456,9 @@ begin
       end if;
     end loop;
     if semanas_prot_baja >= 2 then
-      mot := mot || format('La proteína quedó bajo la meta %s semanas seguidas', semanas_prot_baja);
+      mot := array_append(mot, format('La proteína quedó bajo la meta %s semanas seguidas', semanas_prot_baja));
     elsif dias_reg > 0 and dias_prot * 2 < dias_reg then
-      mot := mot || 'La proteína quedó bajo la meta la mayoría de los días';
+      mot := array_append(mot, 'La proteína quedó bajo la meta la mayoría de los días');
     end if;
   end if;
 
@@ -470,7 +470,7 @@ begin
 
   if ma_act is null or ma_ant is null then
     s_cue := 50;
-    mot := mot || 'Registra tu peso al menos una vez por semana para medir la tendencia';
+    mot := array_append(mot, 'Registra tu peso al menos una vez por semana para medir la tendencia');
   else
     delta := ma_act - ma_ant;
     if p.objetivo = 'bajar_grasa' then
@@ -479,15 +479,15 @@ begin
         s_cue := greatest(s_cue, 80);
       end if;
       if delta < -1.0 then
-        mot := mot || 'Bajas más de 1 kg por semana: revisa que no estés comiendo muy poco';
+        mot := array_append(mot, 'Bajas más de 1 kg por semana: revisa que no estés comiendo muy poco');
       elsif delta >= 0.2 then
-        mot := mot || 'El peso promedio de 3 semanas subió';
+        mot := array_append(mot, 'El peso promedio de 3 semanas subió');
       elsif delta > -0.2 then
-        mot := mot || 'El peso promedio de 3 semanas está estable';
+        mot := array_append(mot, 'El peso promedio de 3 semanas está estable');
       end if;
     elsif p.objetivo = 'fuerza' then
       s_cue := case when delta between -0.2 and 0.6 then 100 when delta > 0.6 then 60 else 40 end;
-      if delta < -0.2 then mot := mot || 'Estás bajando de peso: puede frenar tu ganancia de fuerza'; end if;
+      if delta < -0.2 then mot := array_append(mot, 'Estás bajando de peso: puede frenar tu ganancia de fuerza'); end if;
     else
       s_cue := case when abs(delta) <= 0.5 then 100 else 60 end;
     end if;
@@ -565,7 +565,7 @@ begin
     dec := 'mantener';
     mot_dec := 'Estás en el nivel más alto: sigue progresando cargas o variantes más difíciles';
   elsif dec = 'bajar' and ant_nivel is null then
-    mot_dec := mot_dec || '. Ya estás en Principiante: usa las variantes más fáciles';
+    mot_dec := mot_dec || '. Ya estás en Principiante: usa las variantes más fáciles'::text;
   end if;
 
   prog := round(100 * (

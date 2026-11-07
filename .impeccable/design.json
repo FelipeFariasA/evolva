@@ -870,7 +870,7 @@
         "Cuerpo completo"
       ],
       "fallback": "Mancuerna (mismo glifo de la pestaña Rutina)",
-      "pending": "Pictogramas por ejercicio aún no existen."
+      "perExercise": "PICTO_EJ: un pictograma propio para cada uno de los 39 ejercicios del catálogo, por nombre; orden de respaldo ejercicio → grupo muscular → mancuerna."
     }
   },
   "components": [

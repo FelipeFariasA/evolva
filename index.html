@@ -275,7 +275,52 @@ const PICTO = {
   'Movilidad': pic('<circle cx="12" cy="4" r="2" fill="currentColor" stroke="none"/><path d="M12 6.6V13M12 8.4 6 4.6M12 8.4 18 4.6M12 13 6.6 20.6M12 13l5.4 7.6"/>'),
   'Cuerpo completo': pic('<circle cx="12" cy="3.6" r="2" fill="currentColor" stroke="none"/><path d="M12 6.2V13M12 7.6 8 2.6M12 7.6l4-5M12 13 8.8 18.4M12 13l3.2 5.4M3 21h18"/>')
 };
+// Un pictograma propio por ejercicio (misma gramática: cabeza llena, trazo 2,2, suelo y aparato solo si se usa).
+const cab = (x, y) => `<circle cx="${x}" cy="${y}" r="2" fill="currentColor" stroke="none"/>`;
+const SUELO = 'M2.5 21h19';
+const PICTO_EJ = {
+  'Sentadilla a caja': pic(cab(11.2, 5.2) + `<path d="M14 13.6 12.2 7.8M12.4 9.2 7 10.4M14 13.6H8.6V20.6M${SUELO.slice(1)}"/><rect x="14" y="14.2" width="6" height="6.8" rx="1"/>`),
+  'Flexiones inclinadas': pic(cab(4.4, 7.8) + `<path d="M6.4 9.6 20 20.4M6.4 9.6 5 13.2M${SUELO.slice(1)}"/><rect x="2.4" y="13.2" width="5.6" height="7.8" rx="1"/>`),
+  'Remo con banda elástica': pic(cab(6.4, 5.4) + '<path d="M6.4 7.8V15H19.4M6.4 9.4 3.8 11.8 8.8 12"/><path d="M8.8 12Q14.4 12 19.4 14.6" stroke-dasharray="1.6 2"/>'),
+  'Puente de glúteos': PICTO['Glúteos'],
+  'Plancha frontal': PICTO['Core'],
+  'Zancada estática asistida': pic(cab(11, 4.4) + '<path d="M11 6.8V13M11 8.6 20 9.6M11 13 15.4 15.6V20.6M11 13 8.4 19.4 4.6 20.4M21 3v18"/>'),
+  'Press de hombro sentado con mancuernas': pic(cab(12, 6.2) + '<path d="M12 9 8 8.2V3.4M12 9l4-.8V3.4M6.6 3.4h2.8M14.6 3.4h2.8M12 9v5.6h4.4v6M7 15.2h7M8.2 15.2v5.4"/>'),
+  'Peso muerto rumano con mancuernas ligeras': pic(cab(5.6, 6.8) + `<path d="M7.4 8.2 14.4 11.8 14.2 20.6M9 9.4V15.4M7.6 15.8h2.8M${SUELO.slice(1)}"/>`),
+  'Dead bug': pic(cab(4, 15.4) + '<path d="M6 16H14M8 16V9M8 16 3.8 11.2M14 16V11H18M14 16 20.6 13.6M2 19h20"/>'),
+  'Caminata rápida': pic(cab(12, 3.8) + `<path d="M12 6.4V13M12 8 9.4 11.6M12 8l2.8 3.4M12 13 9.2 20.4M12 13l3 7.4M${SUELO.slice(1)}"/>`),
+  'Gato-camello': pic(cab(3.4, 14.8) + `<path d="M5.6 13Q11 7 16.4 13M5.6 13V20M16.4 13V20H21M${SUELO.slice(1)}"/>`),
+  'Rotación torácica en cuadrupedia': pic(cab(4, 10.6) + `<path d="M6 12H16M6 12V20M6 12 8.2 4.6M16 12V20H20.6M${SUELO.slice(1)}"/>`),
+  'Movilidad de cadera 90/90': pic(cab(11, 4.6) + '<path d="M11 7V14M11 8.8 14.6 12M11 14 16.6 15 20 18.4M11 14 6.4 16.4 3.6 13.6M2.5 20h19"/>'),
+  'Estiramiento de isquiotibiales con banda': pic(cab(4, 15.8) + '<path d="M6 16.4H20.6M13 16.4 17.6 5.4M7.6 16.4 9.6 11M2 19h20"/><path d="M9.6 11 17.6 5.4" stroke-dasharray="1.6 2"/>'),
+  'Sentadilla goblet': pic(cab(8.5, 4.6) + `<path d="M9 7.4 10.8 13H16.2L15.2 20M9.6 9 12 9.6M${SUELO.slice(1)}"/><circle cx="13.4" cy="9.8" r="1.5"/>`),
+  'Flexiones': PICTO['Pecho'],
+  'Remo con mancuerna a una mano': pic(cab(18, 8.4) + `<path d="M16 10H8.2M8.2 10 7.4 20.6M16 10 16.6 14.2M14.6 10.4 13.2 13.4M11.8 13.8h2.6M${SUELO.slice(1)}"/><rect x="14.4" y="14.2" width="6.6" height="6.8" rx="1"/>`),
+  'Hip thrust con mancuerna': pic(cab(4.4, 9.4) + `<path d="M6 12 12 10 16.6 11V20.6M10.4 8.4h3.2M${SUELO.slice(1)}"/><rect x="2.4" y="12" width="4.6" height="9" rx="1"/>`),
+  'Plancha lateral': pic(cab(5, 9.8) + `<path d="M6.6 11.6 20 20.4M6.6 11.6V20.4H9.6M7.6 12.2 8.6 5M${SUELO.slice(1)}"/>`),
+  'Zancada caminando': pic(cab(11, 4.4) + '<path d="M11 6.8V13M11 8.6 14 11.6M11 8.6 8 11.4M11 13 15.6 15.6V20.6M11 13 8.4 19.4 4.8 20.4M17.6 6H21M19.6 4.6 21 6l-1.4 1.4"/>'),
+  'Press militar de pie con mancuernas': pic(cab(12, 7.2) + '<path d="M8 3.4V8.6L12 10M16 3.4V8.6L12 10M6.6 3.4h2.8M14.6 3.4h2.8M12 9.6V15.4M12 15.4 9.8 21M12 15.4l2.2 5.6"/>'),
+  'Peso muerto rumano': pic(cab(5.6, 6.8) + `<path d="M7.4 8.2 14.4 11.8 14.2 20.6M9 9.4V14.8M${SUELO.slice(1)}"/><circle cx="9" cy="16.4" r="1.7"/>`),
+  'Escaladores': pic(cab(4.6, 9) + '<path d="M6.4 10.4 19.6 15.6M7.6 11V18.4M15 14 11.6 16.2 13.2 18.4M2 19h20"/>'),
+  'Intervalos en bicicleta o trote': pic(cab(12.6, 3.8) + '<circle cx="6" cy="16.2" r="3.6"/><circle cx="18" cy="16.2" r="3.6"/><path d="M6 16.2 10 10.4H16L18 16.2M10 10.4 13 16.2M12.6 6.2 10.8 10.4M12.4 7.2 16 9.4"/>'),
+  'Sentadilla profunda con pausa': pic(cab(11, 5) + `<path d="M11 7.4 11.2 15.8 15.6 13.4 14.6 20.6M11.2 9.2 14 12.2M18.6 3.6v3.6M20.8 3.6v3.6M${SUELO.slice(1)}"/>`),
+  'Zancada con rotación torácica': pic(cab(11, 5.2) + '<path d="M11 7.6V13.4M11 9.2 7.4 3.8M11 9.2 14.4 14.6M11 13.4 16 16V20.6M11 13.4 8 19.8 4.4 20.6M16.4 4.2a2.6 2.6 0 1 1-.8 4.4"/>'),
+  'Puente de glúteos a una pierna': pic(cab(4, 14.6) + `<path d="M5.8 15.8 12.4 10.4 16.6 11.4 17.4 17.4M12.4 10.4 19.6 5.6M${SUELO.slice(1)}"/>`),
+  'Sentadilla búlgara': pic(cab(9.4, 4.4) + `<path d="M9.6 6.8 10 12.8 6.4 15.2V20.6M10 12.8 12.4 18.4 16 13.4M${SUELO.slice(1)}"/><rect x="15" y="13.8" width="6" height="7.2" rx="1"/>`),
+  'Flexiones declinadas': pic(cab(3.8, 15.4) + `<path d="M6 16.6 17.8 12.2M6.6 16.4 6.6 20.6M${SUELO.slice(1)}"/><rect x="16.4" y="13.2" width="5.2" height="7.8" rx="1"/>`),
+  'Dominadas': PICTO['Espalda'],
+  'Peso muerto convencional': pic(cab(5.6, 6.8) + `<path d="M7.4 8.2 14 11.6 12 15.6 13.6 20.6M9 9.4V15.4M${SUELO.slice(1)}"/><circle cx="9" cy="17.6" r="2.6"/>`),
+  'Rueda abdominal': pic(cab(6.4, 11.2) + '<path d="M8 13.6 14.4 14.6 17 20H21M8 13.6 4.4 18.2"/><circle cx="4.4" cy="18.8" r="2.2"/>'),
+  'Press militar con barra': PICTO['Hombros'],
+  'Hip thrust con barra': pic(cab(4.4, 9.4) + `<path d="M6 12 12 10 16.6 11V20.6M8.4 8h7.2M${SUELO.slice(1)}"/><rect x="10.8" y="5.4" width="2.4" height="5.2" rx=".6" fill="currentColor"/><rect x="2.4" y="12" width="4.6" height="9" rx="1"/>`),
+  'Burpees': PICTO['Cuerpo completo'],
+  'Intervalos de alta intensidad': pic(cab(13.4, 3.8) + '<path d="M13 6.4 11 12.2M12.6 8.2 16.4 9.6M12.2 8.4 8.8 10.6M11 12.2 15 15.2 14 20.6M11 12.2 8 16.2 4.8 15.4M2 6.6h3.4M2.6 9.6h2.4"/>'),
+  'Sentadilla cosaca': pic(cab(8, 6.6) + `<path d="M8 9 8.6 14.4 5 16.4 5.6 20.6M8.6 14.4 20 20M20 20l.6-1.8M8.4 10.6 12.6 11.4M${SUELO.slice(1)}"/>`),
+  'Jefferson curl ligero': pic(cab(5.6, 14) + `<path d="M14 12.4V20.6M14 12.4C14 7 8 6.8 7.6 11.6M9.4 10.4 9.6 17.2M8.2 17.6h2.8M${SUELO.slice(1)}"/>`),
+  'Puente completo': pic(cab(6.4, 16.8) + `<path d="M4.4 20.6 7 13M7 13Q12 5.6 17 12M17 12 19.6 15V20.6M${SUELO.slice(1)}"/>`)
+};
 const pictograma = g => PICTO[g] || pic('<path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/>');
+const pictogramaEj = e => PICTO_EJ[e.nombre] || pictograma(e.grupo_muscular);
 // Firma: el avance de nivel como tramo de Metro. Estaciones = niveles; el tren marca el avance.
 function lineaNivel(nivel, progreso, { etiqueta = true } = {}) {
   const idx = NIVELES.indexOf(nivel), p = Math.max(0, Math.min(100, progreso || 0));
@@ -715,7 +760,7 @@ async function vRutina(nivelVer, diaVer) {
         <select data-k="${e.id}_${i + 1}" data-f="rpe" aria-label="esfuerzo serie ${i + 1}"><option value="">RPE</option>${Array.from({ length: 10 }, (_, j) => `<option ${String(b.rpe) === String(j + 1) ? 'selected' : ''}>${j + 1}</option>`).join('')}</select>`;
     }).join('');
     return `<div class="ex" data-ej="${e.id}" data-series="${re.series}">
-      <div class="picto" role="img" aria-label="${esc(e.grupo_muscular)}">${pictograma(e.grupo_muscular)}</div><span class="num" aria-hidden="true">${idx + 1}</span>
+      <div class="picto" role="img" aria-label="Pictograma: ${esc(e.nombre)}">${pictogramaEj(e)}</div><span class="num" aria-hidden="true">${idx + 1}</span>
       <h3>${esc(e.nombre)}</h3><div class="meta">${esc(e.grupo_muscular)} · ${re.series} series de ${re.reps_min}–${re.reps_max} ${UNIDAD_TX[e.unidad]}</div>
       <div class="small muted" style="margin-top:4px">${esc(e.descripcion || '')}</div>
       ${f || dif ? `<div class="var">${f ? `Más fácil: ${esc(f.nombre)}` : ''}${f && dif ? ' · ' : ''}${dif ? `Más difícil: ${esc(dif.nombre)}` : ''}</div>` : ''}

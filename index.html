@@ -467,17 +467,21 @@ function vSinAcceso(perfil) {
 
 async function iniciar(user) {
   S.user = user;
+  const turno = S.turno = (S.turno || 0) + 1; // solo el arranque más reciente dibuja la pantalla
   $('#root').innerHTML = `<div class="empty" style="padding-top:30vh"><span class="spin"></span></div>`;
   const [{ data: perfil, error }, acceso] = await Promise.all([
     sb.from('perfiles').select('*').eq('id', user.id).maybeSingle(),
     tieneAcceso().catch(e => ({ error: e }))
   ]);
+  if (turno !== S.turno) return;
+  const fallo = e => { $('#root').innerHTML = `<div class="login"><div class="alert bad" role="alert">${esc(errMsg(e))}</div><button class="btn sec" id="ini-reintentar" style="margin-top:12px">Reintentar</button> <button class="btn ghost" style="margin-top:12px" onclick="salir()">Cerrar sesión</button></div>`; $('#ini-reintentar').onclick = () => iniciar(user); };
   const errorCarga = error || acceso?.error;
-  if (errorCarga) { $('#root').innerHTML = `<div class="login"><div class="alert bad" role="alert">${esc(errMsg(errorCarga))}</div><button class="btn sec" id="ini-reintentar" style="margin-top:12px">Reintentar</button> <button class="btn ghost" style="margin-top:12px" onclick="salir()">Cerrar sesión</button></div>`; $('#ini-reintentar').onclick = () => iniciar(user); return; }
+  if (errorCarga) return fallo(errorCarga);
   if (acceso !== true) return vSinAcceso(perfil);
   if (!perfil) return vOnboarding();
   S.perfil = perfil;
-  await cargarBase();
+  try { await cargarBase(); } catch (e) { if (turno === S.turno) fallo(e); return; }
+  if (turno !== S.turno) return;
   sincronizarCola();
   vApp();
 }
@@ -568,8 +572,9 @@ function vOnboarding() {
     if (!p.peso_inicial || !p.estatura_cm) return toast('Ingresa tu peso y estatura para calcular tus metas.');
     if (p.peso_inicial < 30 || p.peso_inicial > 300 || p.estatura_cm < 100 || p.estatura_cm > 250) return toast('Revisa el peso y la estatura.');
     const b = $('#b-onb'); b.disabled = true; b.textContent = 'Guardando…';
-    const { error } = await sb.from('perfiles').insert({ id: S.user.id, ...p, consentimiento_at: new Date().toISOString() });
-    if (error) { b.disabled = false; b.textContent = 'Empezar'; return toast(errMsg(error)); }
+    // upsert: si el perfil ya se guardó (un intento anterior o una conexión que se cortó), se actualiza y se sigue.
+    const { error } = await sb.from('perfiles').upsert({ id: S.user.id, ...p, consentimiento_at: new Date().toISOString() }, { onConflict: 'id' });
+    if (error && error.code !== '23505') { b.disabled = false; b.textContent = 'Empezar'; return toast(errMsg(error)); }
     await sb.from('mediciones').upsert({ fecha: hoy(), peso: p.peso_inicial }, { onConflict: 'usuario_id,fecha' });
     await sb.rpc('calcular_mi_meta');
     iniciar(S.user);
@@ -1115,7 +1120,9 @@ async function eliminarDatos(despues) {
 
 // ---------- arranque ----------
 sb.auth.onAuthStateChange((ev, session) => {
-  if (session?.user) { if (!S.user || S.user.id !== session.user.id) setTimeout(() => iniciar(session.user), 0); }
+  // S.user se fija aquí mismo: Supabase puede avisar dos veces seguidas (INITIAL_SESSION y SIGNED_IN)
+  // y sin esto la app arrancaba dos veces en paralelo.
+  if (session?.user) { if (!S.user || S.user.id !== session.user.id) { S.user = session.user; setTimeout(() => iniciar(session.user), 0); } }
   else if (ev === 'SIGNED_OUT' || ev === 'INITIAL_SESSION') { S.user = null; vLogin(); }
 });
 </script>
